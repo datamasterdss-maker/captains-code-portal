@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b2545">
+  <title>Captains Code Consulting | Sail the Three C's</title>
+  <style>
+    :root { --navy:#0b2545; --navy-2:#12385d; --blue:#1d6384; --sea:#dcecf2; --gold:#e9c46a; --gold-dark:#c99d35; --ink:#172b3d; --muted:#607286; --paper:#f4f7fa; --white:#ffffff; --line:#dbe4eb; --green:#18794e; --red:#b42318; --shadow:0 18px 45px rgba(11,37,69,.10); --radius:20px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; scroll-padding-top:92px; }
+    body { margin:0; color:var(--ink); background:var(--paper); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.6; }
+    a { color:inherit; }
+    button,input,textarea,select { font:inherit; }
+    button,a { -webkit-tap-highlight-color:transparent; }
+    .site-header { position:sticky; top:0; z-index:50; background:rgba(11,37,69,.97); color:white; box-shadow:0 6px 24px rgba(0,0,0,.13); backdrop-filter:blur(12px); }
+    .nav-wrap { max-width:1180px; margin:auto; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; gap:20px; }
+    .brand { display:flex; align-items:center; gap:12px; text-decoration:none; min-width:0; }
+    .brand-mark { width:44px; height:44px; flex:0 0 44px; display:grid; place-items:center; border:1px solid rgba(233,196,106,.7); border-radius:14px; color:var(--gold); background:rgba(255,255,255,.05); }
+    .brand-mark svg { width:28px; height:28px; }
+    .brand-name { font-weight:850; letter-spacing:.08em; font-size:.94rem; line-height:1.15; display:block; }
+    .brand-sub { color:#b8d9ee; font-size:.67rem; letter-spacing:.23em; margin-top:4px; display:block; }
+    .nav-links { display:flex; align-items:center; gap:5px; }
+    .nav-links a { text-decoration:none; color:#e8f1f7; padding:10px 13px; border-radius:10px; font-weight:650; font-size:.92rem; transition:.2s ease; }
+    .nav-links a:hover,.nav-links a.active { color:var(--navy); background:var(--gold); }
+    .menu-toggle { display:none; border:1px solid rgba(255,255,255,.3); color:white; background:transparent; border-radius:10px; padding:8px 11px; cursor:pointer; }
+    .hero { position:relative; overflow:hidden; color:white; background:radial-gradient(ellipse at 82% 20%,rgba(29,99,132,.72),transparent 34%),linear-gradient(120deg,#081d37 0%,#0b2545 52%,#154969 100%); }
+    .hero::after { content:""; position:absolute; inset:auto -8% -120px -8%; height:210px; border-radius:50% 50% 0 0 / 35% 35% 0 0; background:rgba(255,255,255,.035); border-top:1px solid rgba(233,196,106,.22); transform:rotate(-2deg); }
+    .hero-inner { max-width:1180px; margin:auto; padding:78px 24px 92px; display:grid; grid-template-columns:1.2fr .8fr; align-items:center; gap:46px; position:relative; z-index:1; }
+    .eyebrow { color:var(--gold); text-transform:uppercase; letter-spacing:.2em; font-weight:800; font-size:.76rem; display:flex; align-items:center; gap:10px; }
+    .eyebrow::before { content:""; width:30px; height:2px; background:var(--gold); }
+    h1 { margin:17px 0 15px; font-size:clamp(2.55rem,5vw,4.65rem); line-height:1.04; letter-spacing:-.045em; }
+    .hero h1 span { color:var(--gold); }
+    .hero-copy { color:#d9e7f0; max-width:640px; font-size:clamp(1.05rem,1.6vw,1.2rem); }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:28px; }
+    .btn { display:inline-flex; justify-content:center; align-items:center; gap:8px; border:1px solid transparent; border-radius:12px; padding:12px 18px; text-decoration:none; cursor:pointer; font-weight:800; transition:transform .18s,box-shadow .18s,background .18s; }
+    .btn:hover { transform:translateY(-2px); }
+    .btn-gold { background:var(--gold); color:var(--navy); box-shadow:0 8px 22px rgba(233,196,106,.17); }
+    .btn-gold:hover { background:#f3d582; }
+    .btn-outline { color:white; border-color:rgba(255,255,255,.35); background:rgba(255,255,255,.04); }
+    .btn-outline:hover { background:rgba(255,255,255,.12); }
+    .hero-art { min-height:315px; display:grid; place-items:center; position:relative; }
+    .compass { width:min(320px,80vw); aspect-ratio:1; border-radius:50%; display:grid; place-items:center; border:1px solid rgba(233,196,106,.55); background:radial-gradient(circle,rgba(255,255,255,.07) 0 42%,transparent 43%),rgba(255,255,255,.025); box-shadow:inset 0 0 0 14px rgba(255,255,255,.025),0 25px 65px rgba(0,0,0,.18); position:relative; }
+    .compass::before,.compass::after { content:""; position:absolute; background:rgba(233,196,106,.34); }
+    .compass::before { width:1px; height:84%; }
+    .compass::after { height:1px; width:84%; }
+    .compass-inner { width:68%; aspect-ratio:1; border:1px dashed rgba(233,196,106,.55); border-radius:50%; display:grid; place-items:center; position:relative; }
+    .compass-inner svg { width:68%; max-width:170px; filter:drop-shadow(0 9px 12px rgba(0,0,0,.25)); }
+    .direction { position:absolute; font-size:.72rem; font-weight:900; letter-spacing:.12em; color:var(--gold); }
+    .direction.n { top:9%; } .direction.s { bottom:9%; } .direction.e { right:9%; } .direction.w { left:9%; }
+    .floating-tag { position:absolute; bottom:12%; left:-1%; padding:12px 15px; border-radius:13px; background:#fff; color:var(--navy); box-shadow:var(--shadow); font-weight:800; font-size:.88rem; }
+    .floating-tag small { display:block; color:var(--muted); font-weight:600; font-size:.72rem; }
+    main { max-width:1180px; margin:auto; padding:0 24px 70px; }
+    section.content-section { padding:76px 0 0; }
+    .section-head { display:flex; justify-content:space-between; align-items:end; gap:24px; margin-bottom:27px; }
+    .section-kicker { color:var(--blue); text-transform:uppercase; letter-spacing:.17em; font-weight:850; font-size:.73rem; }
+    h2 { color:var(--navy); font-size:clamp(1.8rem,3vw,2.5rem); letter-spacing:-.035em; line-height:1.16; margin:8px 0 9px; }
+    .section-intro { max-width:690px; margin:0; color:var(--muted); }
+    .section-rule { width:54px; height:4px; background:var(--gold); border-radius:10px; margin-top:15px; }
+    .welcome-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; }
+    .welcome-panel,.mission-panel { border-radius:var(--radius); padding:30px; box-shadow:var(--shadow); }
+    .welcome-panel { color:white; background:linear-gradient(140deg,var(--navy),#16496a); position:relative; overflow:hidden; }
+    .welcome-panel::after { content:"✦"; position:absolute; right:18px; top:4px; font-size:9rem; line-height:1; color:rgba(255,255,255,.055); }
+    .welcome-panel h3 { font-size:1.55rem; margin:0 0 10px; position:relative; }
+    .welcome-panel p { color:#d9e7f0; max-width:650px; margin-bottom:0; position:relative; }
+    .mission-panel { background:white; border:1px solid var(--line); }
+    .mission-panel h3 { color:var(--navy); margin:0 0 10px; }
+    .mission-panel p { margin:0; color:var(--muted); }
+    .three-cs { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .value-card,.project-card,.stock-card { background:white; border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 8px 24px rgba(11,37,69,.045); transition:transform .2s,box-shadow .2s; }
+    .value-card:hover,.project-card:hover,.stock-card:hover { transform:translateY(-4px); box-shadow:var(--shadow); }
+    .value-card { padding:25px; }
+    .value-icon { width:48px; height:48px; border-radius:14px; background:var(--sea); color:var(--blue); display:grid; place-items:center; font-size:1.35rem; font-weight:900; margin-bottom:18px; }
+    .value-card h3 { color:var(--navy); margin:0 0 8px; font-size:1.16rem; }
+    .value-card p { color:var(--muted); margin:0; font-size:.94rem; }
+    .company-band { display:grid; grid-template-columns:.85fr 1.15fr; gap:30px; align-items:center; background:#e9f1f5; border:1px solid #d6e4ec; border-radius:var(--radius); padding:30px; }
+    .company-emblem { min-height:210px; border-radius:16px; display:grid; place-items:center; background:linear-gradient(145deg,#0b2545,#1d6384); color:var(--gold); }
+    .company-emblem svg { width:110px; height:110px; }
+    .company-band h3 { color:var(--navy); margin-top:0; font-size:1.45rem; }
+    .company-band p { color:#52677b; }
+    .pill-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:18px; }
+    .pill { background:white; border:1px solid #cfdee7; color:var(--navy); padding:7px 11px; border-radius:999px; font-size:.82rem; font-weight:750; }
+    .project-tools,.stock-tools { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+    .field { border:1px solid #cbd8e2; border-radius:11px; background:white; color:var(--ink); padding:11px 13px; min-height:44px; outline:none; width:100%; }
+    .field:focus { border-color:var(--blue); box-shadow:0 0 0 3px rgba(29,99,132,.13); }
+    .search-field { max-width:240px; }
+    .filter-select { width:auto; min-width:140px; }
+    .project-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .project-card { padding:23px; display:flex; flex-direction:column; min-height:295px; user-select:none; }
+    .project-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .project-symbol { width:43px; height:43px; display:grid; place-items:center; border-radius:13px; background:#edf4f8; color:var(--blue); font-size:1.25rem; }
+    .tag { color:#24536f; background:#eaf3f7; border-radius:999px; padding:5px 10px; font-size:.72rem; font-weight:800; }
+    .project-card h3 { color:var(--navy); margin:16px 0 6px; font-size:1.18rem; }
+    .project-card p { color:var(--muted); margin:0 0 14px; font-size:.92rem; }
+    .top-score-badge { background:linear-gradient(135deg,#0b2545,#164268); border:1px solid var(--gold); border-left:4px solid var(--gold); border-radius:11px; padding:9px 12px; margin-bottom:16px; color:white; display:flex; align-items:center; justify-content:space-between; gap:8px; box-shadow:0 6px 16px rgba(11,37,69,0.08); user-select:none; }
+    .top-score-label { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--gold); font-weight:850; display:block; }
+    .top-score-holder { font-size:0.85rem; font-weight:800; color:#ffffff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:155px; }
+    .top-score-val { font-family:'Courier New',monospace; font-size:0.98rem; font-weight:900; color:#55efc4; background:rgba(0,0,0,0.28); padding:4px 8px; border-radius:7px; white-space:nowrap; }
+    .project-card .project-link { margin-top:auto; color:var(--blue); font-weight:850; text-decoration:none; cursor:pointer; background:#edf4f8; border:1px solid #d0e2ed; padding:10px 14px; border-radius:10px; text-align:center; transition:0.18s; }
+    .project-card .project-link:hover { background:var(--navy); color:var(--gold); border-color:var(--navy); }
+    .empty-state { grid-column:1 / -1; text-align:center; border:1px dashed #bdcbd6; border-radius:16px; padding:28px; color:var(--muted); background:rgba(255,255,255,.6); }
+    .api-guidance-box { background:#eef7fc; border:1px solid #c2def0; border-radius:14px; padding:16px 20px; margin-bottom:20px; font-size:0.88rem; color:var(--navy); }
+    .api-guidance-box code { background:#dbeaf3; padding:2px 6px; border-radius:6px; font-family:monospace; font-size:0.85rem; }
+    .stock-tools { margin-bottom:18px; }
+    .stock-tools .field { width:auto; flex:1; min-width:145px; }
+    .stock-summary { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:18px; }
+    .summary-tile { padding:17px 19px; background:white; border:1px solid var(--line); border-radius:15px; }
+    .summary-tile span { color:var(--muted); display:block; font-size:.79rem; font-weight:750; }
+    .summary-tile strong { display:block; color:var(--navy); font-size:1.4rem; margin-top:4px; }
+    .stock-table-wrap { overflow-x:auto; background:white; border:1px solid var(--line); border-radius:16px; box-shadow:0 8px 24px rgba(11,37,69,.045); }
+    .stock-table { width:100%; border-collapse:collapse; min-width:620px; }
+    .stock-table th,.stock-table td { padding:15px 17px; border-bottom:1px solid #edf1f4; text-align:left; }
+    .stock-table th { color:var(--muted); font-size:.76rem; text-transform:uppercase; letter-spacing:.08em; background:#f8fafc; }
+    .stock-table tr:last-child td { border-bottom:0; }
+    .stock-table tbody tr:hover { background:#f8fbfd; }
+    .ticker { display:block; color:var(--navy); font-weight:900; }
+    .company-name { display:block; color:var(--muted); font-size:.8rem; }
+    .change-up { color:var(--green); font-weight:800; }
+    .change-down { color:var(--red); font-weight:800; }
+    .remove-btn { border:1px solid #e1e7ec; color:#52677b; background:white; border-radius:8px; padding:6px 9px; cursor:pointer; }
+    .remove-btn:hover { border-color:#d2a5a2; color:var(--red); background:#fff7f6; }
+    .stock-footnote { color:var(--muted); font-size:.8rem; margin-top:12px; }
+    .contact-card { display:grid; grid-template-columns:1fr auto; align-items:center; gap:20px; background:var(--navy); color:white; border-radius:var(--radius); padding:30px; }
+    .contact-card h3 { font-size:1.45rem; margin:0 0 7px; }
+    .contact-card p { color:#c9dbe8; margin:0; }
+    footer { background:#07192e; color:#c6d6e2; margin-top:70px; }
+    .footer-inner { max-width:1180px; margin:auto; padding:27px 24px; display:flex; align-items:center; justify-content:space-between; gap:18px; }
+    .footer-inner strong { color:white; }
+    .footer-links { display:flex; flex-wrap:wrap; gap:15px; }
+    .footer-links a { color:#c6d6e2; text-decoration:none; font-size:.86rem; }
+    .footer-links a:hover { color:var(--gold); }
+    .toast { position:fixed; z-index:100; bottom:22px; right:22px; max-width:min(410px,calc(100vw - 44px)); background:#0b2545; color:white; padding:13px 17px; border-radius:12px; border-left:4px solid var(--gold); box-shadow:var(--shadow); opacity:0; transform:translateY(10px); pointer-events:none; transition:.25s; }
+    .toast.show { opacity:1; transform:translateY(0); }
+    @media (max-width:850px) { .hero-inner { grid-template-columns:1fr .65fr; gap:20px; padding-top:60px; } .hero-art { min-height:250px; } .three-cs,.project-grid { grid-template-columns:repeat(2,1fr); } .welcome-grid { grid-template-columns:1fr; } }
+    @media (max-width:650px) { .nav-links { display:none; position:absolute; left:0; right:0; top:100%; background:var(--navy); flex-direction:column; padding:12px; } .nav-links.open { display:flex; } .menu-toggle { display:inline-flex; } .hero-inner { display:block; } .three-cs,.project-grid,.stock-summary,.company-band,.contact-card { grid-template-columns:1fr; } }
+    #stockContextMenu { display:none; position:absolute; background:white; border:1px solid var(--line); box-shadow:0 18px 45px rgba(11,37,69,.2); border-radius:8px; z-index:1000; padding:8px 0; min-width:260px; }
+    .context-menu-item { padding:12px 18px; cursor:pointer; color:var(--navy); font-size:0.9rem; font-weight:750; display:flex; align-items:center; gap:10px; }
+    .context-menu-item:hover { background:var(--sea); color:var(--blue); }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="nav-wrap">
+      <a class="brand" href="#home">
+        <span class="brand-mark">
+          <svg viewBox="0 0 48 48" fill="none">
+            <path d="M24 4 29 19 44 24 29 29 24 44 19 29 4 24 19 19 24 4Z" stroke="currentColor" stroke-width="2"/>
+            <path d="M24 12 27 22 37 24 27 26 24 36 21 26 11 24 21 22 24 12Z" fill="currentColor" opacity=".65"/>
+            <circle cx="24" cy="24" r="4" fill="#0b2545" stroke="currentColor" stroke-width="1.5"/>
+          </svg>
+        </span>
+        <span><span class="brand-name">CAPTAINS CODE</span><span class="brand-sub">CONSULTING</span></span>
+      </a>
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="active">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#company">Company</a>
+        <a href="#stocks">Stocks</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">A student-driven enterprise</div>
+        <h1>Captains Code<br><span>Consulting</span></h1>
+        <p class="hero-copy">Sail the Three C's: <strong>Creativity, Collaboration, and Critical Thinking.</strong> Navigate new ideas, build thoughtful solutions, and chart a course toward what comes next.</p>
+        <div class="hero-actions">
+          <a class="btn btn-gold" href="#projects">Explore Our Projects →</a>
+          <a class="btn btn-outline" href="#company">Meet the Company</a>
+        </div>
+      </div>
+      <div class="hero-art">
+        <div class="compass">
+          <span class="direction n">N</span><span class="direction e">E</span><span class="direction s">S</span><span class="direction w">W</span>
+          <div class="compass-inner">
+            <svg viewBox="0 0 180 180" fill="none">
+              <path d="M90 8 111 72 172 90 111 108 90 172 69 108 8 90 69 72 90 8Z" fill="#e9c46a" stroke="#f6df9f" stroke-width="2"/>
+              <path d="M90 25 100 82 155 90 100 98 90 155 80 98 25 90 80 82 90 25Z" fill="#0b2545"/>
+              <path d="M90 25 100 82 90 90 80 82Z" fill="#ffffff"/>
+              <path d="M155 90 100 98 90 90 100 82Z" fill="#6ca9c3"/>
+              <circle cx="90" cy="90" r="9" fill="#e9c46a" stroke="#0b2545" stroke-width="3"/>
+            </svg>
+          </div>
+        </div>
+        <div class="floating-tag">⚓ Learn. Build. Lead.<small>Chart your own course.</small></div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <section class="content-section" aria-labelledby="welcome-title">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Welcome aboard</div>
+          <h2 id="welcome-title">Ideas with direction.</h2>
+          <p class="section-intro">We bring creative thinking and practical skills together to explore technology, business, and the opportunities that connect them.</p>
+          <div class="section-rule"></div>
+        </div>
+      </div>
+      <div class="welcome-grid">
+        <article class="welcome-panel">
+          <h3>Welcome to our company website</h3>
+          <p>Captains Code Consulting is a place to share projects, explore business concepts, and learn by doing. Browse our work, discover our mission, and use our company watchlist as a starting point for learning about publicly traded businesses.</p>
+        </article>
+        <article class="mission-panel">
+          <h3>Our mission</h3>
+          <p>To turn curiosity into capability by using technology, teamwork, and thoughtful problem-solving to design useful ideas and communicate them clearly.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="content-section" aria-labelledby="values-title">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Our guiding principles</div>
+          <h2 id="values-title">The Three C's</h2>
+          <p class="section-intro">Three habits help keep every project on course.</p>
+          <div class="section-rule"></div>
+        </div>
+      </div>
+      <div class="three-cs">
+        <article class="value-card"><div class="value-icon">✦</div><h3>Creativity</h3><p>Imagine possibilities, experiment with ideas, and find fresh ways to solve real problems.</p></article>
+        <article class="value-card"><div class="value-icon">↗</div><h3>Collaboration</h3><p>Listen, share knowledge, and work together to build something stronger than one person could alone.</p></article>
+        <article class="value-card"><div class="value-icon">◇</div><h3>Critical Thinking</h3><p>Ask good questions, evaluate evidence, test assumptions, and explain decisions with clarity.</p></article>
+      </div>
+    </section>
+
+    <section class="content-section" id="company" aria-labelledby="company-title">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Who we are</div>
+          <h2 id="company-title">Company overview</h2>
+          <p class="section-intro">A clear mission, an open mind, and a willingness to learn are the start of every successful voyage.</p>
+          <div class="section-rule"></div>
+        </div>
+      </div>
+      <div class="company-band">
+        <div class="company-emblem">
+          <svg viewBox="0 0 120 120" fill="none">
+            <circle cx="60" cy="60" r="51" stroke="currentColor" stroke-width="2"/>
+            <circle cx="60" cy="60" r="42" stroke="currentColor" stroke-width="1" stroke-dasharray="3 5"/>
+            <path d="M60 17 73 52 103 60 73 68 60 103 47 68 17 60 47 52 60 17Z" fill="currentColor" opacity=".9"/>
+            <path d="M60 28 67 56 92 60 67 64 60 92 53 64 28 60 53 56 60 28Z" fill="#12385d"/>
+            <circle cx="60" cy="60" r="5" fill="#fff"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Our course is built on learning and impact.</h3>
+          <p>We value practical projects, responsible decision-making, and communication that makes complex ideas easier to understand. From software prototypes to engineering simulations, we aim to make every experience a chance to improve.</p>
+          <div class="pill-row"><span class="pill">Technology</span><span class="pill">Aerospace Physics</span><span class="pill">Problem-solving</span><span class="pill">Teamwork</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="content-section" id="projects" aria-labelledby="projects-title">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Built by ideas · Protected by Cryptographic Verification</div>
+          <h2 id="projects-title">Featured Projects & COTS Labs</h2>
+          <p class="section-intro">Launch any simulation in a full-screen browser tab. All telemetry scores are cryptographically signed upon physics completion and synced directly to our cloud grading database.</p>
+          <div class="section-rule"></div>
+        </div>
+        <div class="project-tools">
+          <input class="field search-field" id="projectSearch" type="search" placeholder="Search projects…">
+          <select class="field filter-select" id="projectCategory">
+            <option value="all">All categories</option>
+            <option value="software">Games & Arcade</option>
+            <option value="engineering">Engineering Labs</option>
+          </select>
+          <button class="btn btn-gold" type="button" id="refreshLeaderboardBtn" style="padding:10px 14px;font-size:0.84rem;" title="Sync Top Scores from Google Sheet">↻ Sync Leaderboard</button>
+        </div>
+      </div>
+
+      <div class="project-grid" id="projectGrid">
+
+        <!-- GAME 1: RETRO STARSHIP PILOT -->
+        <article class="project-card" data-category="software" data-search="student game 1 arcade retro starship pilot javascript">
+          <div class="project-top"><div class="project-symbol">🚀</div><span class="tag">Arcade Software</span></div>
+          <h3>Retro Starship Pilot</h3>
+          <p>Navigate an accelerating asteroid belt in this uncapped survival reflex challenge. Play and Win!</p>
+          <div class="top-score-badge" id="badge-starship">
+            <div><span class="top-score-label">🔒 Verified Top Pilot</span><div class="top-score-holder" id="holder-starship">Awaiting Pilot...</div></div>
+            <div class="top-score-val" id="score-starship">0 pts</div>
+          </div>
+          <template id="game-template-1">
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <title>Retro Starship Pilot | Captains Code</title>
+              <style>
+                * { user-select:none; }
+                body { margin:0; overflow:hidden; background:#08121e; color:#fff; font-family:'Inter',sans-serif; }
+                canvas { display:block; }
+                #gameOverUI { position:absolute; top:0; left:0; width:100vw; height:100vh; background:rgba(8,18,30,0.92); display:none; flex-direction:column; align-items:center; justify-content:center; z-index:10; }
+                .box { border:2px solid #e9c46a; padding:40px; border-radius:16px; text-align:center; background:#0b2545; box-shadow:0 15px 45px rgba(0,0,0,0.65); max-width:420px; }
+                input { padding:13px; margin:18px 0; border-radius:8px; border:1px solid #00f2fe; background:#040b16; color:white; text-align:center; font-size:1.1rem; width:260px; outline:none; }
+                button { background:#e9c46a; color:#0b2545; border:none; padding:14px 28px; border-radius:8px; font-weight:900; font-size:1.05rem; cursor:pointer; transition:0.2s; }
+                button:hover:not(:disabled) { background:#f3d582; transform:translateY(-2px); }
+                button:disabled { opacity:0.6; cursor:not-allowed; }
+                #scoreDisplay { position:absolute; top:20px; left:24px; font-size:1.8rem; font-weight:900; color:#e9c46a; z-index:5; font-family:monospace; }
+                #subBanner { position:absolute; top:55px; left:24px; font-size:0.95rem; color:#00f2fe; z-index:5; font-weight:bold; }
+              </style>
+            </head>
+            <body>
+              <div id="scoreDisplay">SCORE: 0</div>
+              <div id="subBanner">🔒 Anti-Cheat Active · Move Mouse / Touch to Dodge</div>
+              <canvas id="gameCanvas"></canvas>
+              <div id="gameOverUI">
+                <div class="box">
+                  <h2 style="margin-top:0;color:#e9c46a;font-size:2rem;">💥 SHIP DESTROYED 💥</h2>
+                  <p style="font-size:1.15rem;color:#c9dbe8;">Verified Survival Score:</p>
+                  <div id="finalScoreText" style="color:#55efc4;font-size:2.3rem;font-weight:900;font-family:monospace;">0</div>
+                  <input type="text" id="playerName" placeholder="Enter Pilot Name..." required autocomplete="off" />
+                  <br/><button id="submitScoreBtn">🔒 Sign & Transmit Score</button>
+                </div>
+              </div>
+              <script>
+                (() => {
+                  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzMrutUPsSmdMSuRpb-I2kH0PA6WXKRWhoTNeCdlvuiDucQfL2him3YYGx2eX60shzO/exec';
+                  document.addEventListener('contextmenu', e => e.preventDefault());
+                  window.addEventListener('keydown', e => { if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toUpperCase() === 'U')) e.preventDefault(); });
+                  const canvas = document.getElementById('gameCanvas'), ctx = canvas.getContext('2d');
+                  canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+                  let _s = 0, _active = true, _f = 0, _vTick = 0x5A17;
+                  const player = { x: canvas.width / 2, y: canvas.height - 100, size: 18 };
+                  const obstacles = [];
+                  const stars = Array.from({length: 120}, () => ({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, size: Math.random() * 2.5, speed: Math.random() * 4 + 1 }));
+                  window.addEventListener('mousemove', e => { if(_active) player.x = e.clientX; });
+                  window.addEventListener('touchmove', e => { if(_active) player.x = e.touches[0].clientX; });
+                  function _sign(student, game, score, ts) {
+                    const raw = `${student}|${game}|${Number(score).toFixed(2)}|${ts}|CCC-V5-SALT-9941`;
+                    let h = 0x811c9dc5;
+                    for (let i = 0; i < raw.length; i++) { h ^= raw.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+                    return (h >>> 0).toString(16).padStart(8, '0');
+                  }
+                  function update() {
+                    if (!_active) return;
+                    ctx.fillStyle = '#08121e'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+                    ctx.fillStyle = 'rgba(255,255,255,0.8)';
+                    stars.forEach(s => { s.y += s.speed; if (s.y > canvas.height) s.y = 0; ctx.fillRect(s.x, s.y, s.size, s.size); });
+                    if (player.x < 15) player.x = 15; if (player.x > canvas.width - 15) player.x = canvas.width - 15;
+                    ctx.fillStyle = '#00f2fe'; ctx.beginPath();
+                    ctx.moveTo(player.x, player.y - player.size * 1.5); ctx.lineTo(player.x - player.size, player.y + player.size); ctx.lineTo(player.x + player.size, player.y + player.size);
+                    ctx.closePath(); ctx.fill();
+                    ctx.fillStyle = '#e9c46a'; ctx.fillRect(player.x - 4, player.y + player.size + 2, 8, Math.random() * 12 + 6);
+                    let spawnRate = Math.max(8, 28 - Math.floor(_f / 280));
+                    if (_f % spawnRate === 0) {
+                      let size = Math.random() * 42 + 20;
+                      obstacles.push({ x: Math.random() * (canvas.width - size), y: -size, size, speed: Math.random() * 4.5 + 3.2 + (_f / 900) });
+                    }
+                    for (let i = 0; i < obstacles.length; i++) {
+                      let obs = obstacles[i]; obs.y += obs.speed;
+                      ctx.fillStyle = '#ff4d6d'; ctx.fillRect(obs.x, obs.y, obs.size, obs.size);
+                      if (player.x < obs.x + obs.size && player.x + player.size > obs.x && player.y - player.size < obs.y + obs.size && player.y + player.size > obs.y) {
+                        _active = false; document.getElementById('finalScoreText').innerText = _s; document.getElementById('gameOverUI').style.display = 'flex';
+                      }
+                      if (obs.y > canvas.height) { obstacles.splice(i, 1); i--; _s += 15; _vTick += 15; }
+                    }
+                    _f++; if(_f % 10 === 0) { _s++; _vTick++; }
+                    document.getElementById('scoreDisplay').innerText = `SCORE: ${_s}`;
+                    requestAnimationFrame(update);
+                  }
+                  document.getElementById('submitScoreBtn').addEventListener('click', () => {
+                    const pName = document.getElementById('playerName').value.trim();
+                    if (!pName) return alert("Please enter a Pilot Name.");
+                    const btn = document.getElementById('submitScoreBtn');
+                    btn.disabled = true; btn.innerText = "⏳ Transmitting to Cloud...";
+                    const verifiedScore = (_vTick - 0x5A17 === _s) ? _s : 0;
+                    const ts = Date.now(), sig = _sign(pName, 'Retro Starship Pilot', verifiedScore, ts);
+                    const payload = { type: 'GAME_OVER', student: pName, game: 'Retro Starship Pilot', score: verifiedScore, ts, sig, migratedByChild: true };
+                    try { const bc = new BroadcastChannel('captains_code_channel'); bc.postMessage(payload); } catch(e) {}
+                    try { if (window.opener) window.opener.postMessage(payload, '*'); } catch(e) {}
+                    fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ student: pName, game: 'Retro Starship Pilot', score: verifiedScore, ts, sig }) })
+                      .catch(() => {})
+                      .finally(() => {
+                        btn.innerText = "✅ Score Logged!";
+                        setTimeout(() => { window.close(); document.getElementById('gameOverUI').style.display = 'none'; }, 500);
+                      });
+                  });
+                  update();
+                })();
+              </script>
+            </body>
+            </html>
+          </template>
+          <button class="project-link launch-newtab-btn" type="button" data-template-id="game-template-1">🚀 Launch Starship Pilot ↗</button>
+        </article>
+
+        <!-- GAME 2: AEROLAB 3D FLIGHT DECK & HANGAR PRO -->
+        <article class="project-card" data-category="engineering" data-search="aerolab loop glider flight deck hangar 3d cad wireframe physics wind decimals">
+          <div class="project-top"><div class="project-symbol">✈️</div><span class="tag">3D CAD Hangar & Wind Tunnel</span></div>
+          <h3>AeroLab Flight Deck & Hangar PRO</h3>
+          <p>Inspect 6 authentic 3D wireframe JSON airframe meshes in 360° Hangar Orbit, morph geometry live, and launch in a 3D wind tunnel.</p>
+          <div class="top-score-badge" id="badge-glider">
+            <div><span class="top-score-label">🔒 Verified Flight Record</span><div class="top-score-holder" id="holder-glider">Awaiting Engineer...</div></div>
+            <div class="top-score-val" id="score-glider">0.00 ft</div>
+          </div>
+          <template id="game-template-2">
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>AeroLab 3D Flight Deck & Hangar PRO | COTS CAD Engine</title>
+              <style>
+                :root { --navy-950:#030812; --navy-900:#061224; --navy-800:#0b2545; --navy-700:#12385d; --blue-600:#1d6384; --cyan:#00f2fe; --mint:#55efc4; --gold:#e9c46a; --coral:#ff4d6d; --purple:#a855f7; --text:#e2eff7; --muted:#8fa6bc; }
+                * { box-sizing:border-box; user-select:none; }
+                body { margin:0; display:flex; height:100vh; width:100vw; overflow:hidden; background:var(--navy-950); color:var(--text); font-family:'Inter',system-ui,sans-serif; }
+                #console { width:430px; min-width:430px; height:100vh; background:linear-gradient(180deg,var(--navy-800) 0%,var(--navy-900) 100%); border-right:2px solid rgba(0,242,254,0.4); box-shadow:10px 0 35px rgba(0,0,0,0.8); display:flex; flex-direction:column; padding:18px 20px; gap:11px; z-index:20; overflow-y:auto; }
+                #console::-webkit-scrollbar { width:8px; } #console::-webkit-scrollbar-thumb { background:rgba(0,242,254,0.35); border-radius:4px; }
+                .console-header { display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px; }
+                .console-title { font-size:1.32rem; font-weight:900; color:var(--gold); letter-spacing:0.06em; text-transform:uppercase; margin:0; }
+                .badge-pro { background:linear-gradient(135deg,rgba(0,242,254,0.2),rgba(85,239,196,0.2)); border:1px solid var(--cyan); color:var(--cyan); font-size:0.74rem; font-weight:900; padding:4px 10px; border-radius:99px; letter-spacing:0.08em; }
+                .section-tag { font-size:0.82rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--cyan); font-weight:900; margin-top:2px; display:flex; justify-content:space-between; }
+                .control-card { background:rgba(18,56,93,0.52); border:1px solid rgba(0,242,254,0.16); border-radius:10px; padding:12px 14px; display:flex; flex-direction:column; gap:8px; }
+                .control-row { display:flex; justify-content:space-between; align-items:center; font-size:0.95rem; font-weight:700; color:#eaf4fc; }
+                .val-tag { font-family:'Courier New',monospace; font-weight:900; color:var(--gold); font-size:1.02rem; }
+                input[type="range"] { width:100%; height:7px; accent-color:var(--cyan); cursor:pointer; margin:2px 0 4px; }
+                select.cots-select { width:100%; padding:9px 10px; border-radius:7px; background:var(--navy-950); color:white; border:1px solid rgba(0,242,254,0.5); font-weight:700; font-size:0.92rem; outline:none; cursor:pointer; }
+                .cam-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:5px; }
+                .cam-btn { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); color:var(--text); padding:9px 4px; border-radius:7px; font-size:0.78rem; font-weight:800; cursor:pointer; transition:0.15s; text-align:center; }
+                .cam-btn.active,.cam-btn:hover { border-color:var(--cyan); color:var(--cyan); background:rgba(0,242,254,0.18); box-shadow:0 0 12px rgba(0,242,254,0.25); }
+                .action-bar { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:auto; padding-top:6px; }
+                .btn-main { border:none; padding:14px 10px; border-radius:9px; font-weight:900; font-size:0.95rem; text-transform:uppercase; letter-spacing:0.05em; cursor:pointer; transition:0.18s; }
+                #hangarBtn { background:linear-gradient(135deg,#1d6384,#00a8cc); color:white; }
+                #launchBtn { background:linear-gradient(135deg,var(--gold),#f4a261); color:var(--navy-950); box-shadow:0 5px 15px rgba(233,196,106,0.35); }
+                .btn-main:hover:not(:disabled) { transform:translateY(-1px); filter:brightness(1.1); }
+                .btn-main:disabled { background:#233345 !important; color:#576b80 !important; box-shadow:none !important; cursor:not-allowed; }
+                .btn-save { grid-column:1 / -1; background:rgba(85,239,196,0.16); border:1px solid var(--mint); color:var(--mint); padding:11px; border-radius:8px; font-weight:800; font-size:0.92rem; cursor:pointer; }
+                .btn-save:hover { background:var(--mint); color:var(--navy-950); }
+                #viewport { flex-grow:1; position:relative; overflow:hidden; background:radial-gradient(circle at 50% 35%,#0c2b4e 0%,#051329 60%,#020710 100%); cursor:grab; }
+                #viewport:active { cursor:grabbing; }
+                canvas#cadCanvas { display:block; width:100%; height:100%; }
+                .hud-top { position:absolute; top:14px; left:16px; right:16px; display:grid; grid-template-columns:repeat(6,1fr); gap:10px; pointer-events:none; z-index:10; }
+                .stat-box { background:rgba(4,11,22,0.86); backdrop-filter:blur(8px); border:1px solid rgba(0,242,254,0.28); border-top:3px solid var(--cyan); border-radius:9px; padding:9px 12px; }
+                .stat-box.gold { border-top-color:var(--gold); } .stat-box.mint { border-top-color:var(--mint); }
+                .stat-label { font-size:0.68rem; font-weight:800; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; }
+                .stat-value { font-family:'Courier New',monospace; font-size:1.3rem; font-weight:900; color:white; margin-top:2px; }
+                .stat-sub { font-size:0.72rem; color:var(--cyan); font-family:monospace; }
+                .stat-box.gold .stat-value { color:var(--gold); } .stat-box.mint .stat-value { color:var(--mint); }
+                #jumbotron { position:absolute; top:105px; left:50%; transform:translateX(-50%); padding:10px 28px; border-radius:99px; font-weight:900; font-size:1.12rem; letter-spacing:0.12em; text-transform:uppercase; pointer-events:none; opacity:0; transition:0.22s; z-index:12; background:rgba(7,20,38,0.94); border:2px solid var(--cyan); color:var(--cyan); box-shadow:0 0 25px rgba(0,242,254,0.35); }
+                #jumbotron.show { opacity:1; transform:translateX(-50%) scale(1.04); }
+                .cad-spec-banner { position:absolute; top:102px; left:16px; background:rgba(4,11,22,0.82); border-left:3px solid var(--cyan); padding:8px 12px; border-radius:6px; font-family:monospace; font-size:0.76rem; color:#b8d9ee; pointer-events:none; z-index:10; }
+                .run-log-widget { position:absolute; bottom:16px; left:16px; width:355px; background:rgba(4,11,22,0.88); backdrop-filter:blur(6px); border:1px solid rgba(0,242,254,0.22); border-radius:11px; padding:12px 14px; z-index:10; font-size:0.8rem; }
+                .widget-header { display:flex; justify-content:space-between; align-items:center; font-weight:900; color:var(--gold); letter-spacing:0.08em; margin-bottom:8px; text-transform:uppercase; font-size:0.76rem; }
+                .clear-btn { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:var(--text); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:5px; cursor:pointer; }
+                .log-table { width:100%; border-collapse:collapse; font-family:monospace; font-size:0.8rem; }
+                .log-table th { text-align:left; color:var(--muted); border-bottom:1px solid rgba(255,255,255,0.12); padding-bottom:4px; }
+                .log-table td { padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+                .radar-widget { position:absolute; bottom:16px; right:16px; width:245px; background:rgba(4,11,22,0.88); backdrop-filter:blur(6px); border:1px solid rgba(0,242,254,0.25); border-radius:11px; padding:12px 14px; z-index:10; font-size:0.8rem; display:flex; flex-direction:column; gap:6px; }
+                #radarCanvas { width:100%; height:130px; background:rgba(11,37,69,0.55); border-radius:7px; border:1px solid rgba(255,255,255,0.08); }
+                #gameOverUI { position:absolute; inset:0; background:rgba(4,11,22,0.92); backdrop-filter:blur(8px); display:none; flex-direction:column; align-items:center; justify-content:center; z-index:30; }
+                .modal-box { background:var(--navy-800); border:2px solid var(--gold); border-radius:16px; padding:32px 40px; text-align:center; width:440px; box-shadow:0 25px 65px rgba(0,0,0,0.85); }
+                .modal-box input { width:100%; padding:12px; border-radius:8px; border:1px solid var(--cyan); background:var(--navy-950); color:white; font-size:1.1rem; text-align:center; margin:16px 0; outline:none; }
+              </style>
+            </head>
+            <body>
+              <aside id="console">
+                <div class="console-header"><h1 class="console-title">✈️ AeroLab 3D PRO</h1><span class="badge-pro">3D CAD WIREFRAME</span></div>
+                <div class="section-tag"><span>1. 3D Hangar Airframe Archetype</span></div>
+                <div class="control-card">
+                  <select id="archetypeSelect" class="cots-select">
+                    <option value="vortex" selected>Vortex Ring (2V Dual-Hoop Classic)</option>
+                    <option value="dart">Apex Dart (High-Speed Swept Delta)</option>
+                    <option value="strato">Stratocruiser (Bi-Wing Twin-Hoop)</option>
+                    <option value="phantom">Phantom Delta (Flying Wing Stealth)</option>
+                    <option value="canard">Sky Canard (Forward-Swept Canard)</option>
+                    <option value="valkyrie">Valkyrie Wing (Triple-Ring Heavy)</option>
+                  </select>
+                </div>
+                <div class="section-tag"><span>2. Launch Kinematics</span></div>
+                <div class="control-card">
+                  <div class="control-row"><span>Launch Pitch Angle</span><span class="val-tag" id="angleVal">38°</span></div>
+                  <input type="range" id="angleSlider" min="5" max="75" value="38" step="1">
+                  <div class="control-row"><span>Catapult Thrust Power</span><span class="val-tag" id="powerVal">82%</span></div>
+                  <input type="range" id="powerSlider" min="25" max="100" value="82" step="1">
+                </div>
+                <div class="section-tag"><span>3. Live 3D CAD Geometry Morphing</span></div>
+                <div class="control-card">
+                  <div class="control-row"><span>Hoop / Wing Scale Ratio</span><span class="val-tag" id="hoopVal">0.65 (Optimal)</span></div>
+                  <input type="range" id="hoopSlider" min="35" max="95" value="65" step="1">
+                  <div class="control-row"><span>Straw Camber Bend</span><span class="val-tag" id="camberVal">+3° Lift</span></div>
+                  <input type="range" id="camberSlider" min="-10" max="15" value="3" step="1">
+                  <div class="control-row"><span>Ballast Mass (CG Node)</span><span class="val-tag" id="massVal">1.8 g</span></div>
+                  <input type="range" id="massSlider" min="10" max="35" value="18" step="1">
+                </div>
+                <div class="section-tag"><span>4. Wind Tunnel & Turbulence</span></div>
+                <div class="control-card">
+                  <div class="control-row"><span>Base Head/Tailwind</span><span class="val-tag" id="windVal">0 mph</span></div>
+                  <input type="range" id="windSlider" min="-20" max="20" value="0" step="1">
+                  <div class="control-row"><span>Crosswind Shear</span><span class="val-tag" id="crossVal">0 mph</span></div>
+                  <input type="range" id="crossSlider" min="-15" max="15" value="0" step="1">
+                </div>
+                <div class="section-tag"><span>5. 3D CAD Viewport Camera</span></div>
+                <div class="cam-grid">
+                  <button class="cam-btn active" id="btnCamHangar" onclick="setCamera('hangar', this)">Hangar</button>
+                  <button class="cam-btn" id="btnCamChase" onclick="setCamera('chase', this)">Chase 3D</button>
+                  <button class="cam-btn" onclick="setCamera('follow', this)">Tracker</button>
+                  <button class="cam-btn" onclick="setCamera('side', this)">Profile</button>
+                  <button class="cam-btn" onclick="setCamera('top', this)">Overhead</button>
+                </div>
+                <div class="action-bar">
+                  <button id="hangarBtn" class="btn-main">🔄 Hangar Inspect</button>
+                  <button id="launchBtn" class="btn-main">🚀 Launch [Space]</button>
+                  <button id="openSubmitBtn" class="btn-save">🔒 Sign & Export Best Flight (<span id="bestBtnText">0.00</span> ft)</button>
+                </div>
+              </aside>
+              <main id="viewport">
+                <div class="hud-top">
+                  <div class="stat-box gold"><div class="stat-label">Net Flight Distance</div><div class="stat-value" id="hudDist">0.00 ft</div><div class="stat-sub" id="hudDrift">Drift: 0.0 ft</div></div>
+                  <div class="stat-box"><div class="stat-label">Airspeed Velocity</div><div class="stat-value" id="hudSpeed">0.0 ft/s</div><div class="stat-sub" id="hudLD">L/D Efficiency: 96%</div></div>
+                  <div class="stat-box"><div class="stat-label">Apex Altitude</div><div class="stat-value" id="hudApex">0.0 ft</div><div class="stat-sub" id="hudHang">Airtime: 0.00 s</div></div>
+                  <div class="stat-box mint"><div class="stat-label">Live Wind Gust</div><div class="stat-value" id="hudGust">+0.0 mph</div><div class="stat-sub" id="hudThermal">Thermal: Neutral</div></div>
+                  <div class="stat-box"><div class="stat-label">Stability Index</div><div class="stat-value" id="hudStab">98.4%</div><div class="stat-sub" id="hudArchName">Vortex Ring</div></div>
+                  <div class="stat-box gold"><div class="stat-label">Session Record</div><div class="stat-value" id="hudBest">0.00 ft</div><div class="stat-sub" id="hudFlights">Flights: 0</div></div>
+                </div>
+                <div class="cad-spec-banner" id="cadSpecBanner">📐 CAD WIREFRAME MESH: <strong style="color:var(--cyan);" id="meshVertCount">164 Vertices / 192 Edges</strong> · Drag mouse to orbit 3D airframe</div>
+                <div id="jumbotron">GLIDER AIRBORNE!</div>
+                <div class="run-log-widget">
+                  <div class="widget-header"><span>📊 Multi-Flight Telemetry Ghost Log</span><button class="clear-btn" onclick="clearGhosts()">Clear Ghosts</button></div>
+                  <table class="log-table">
+                    <thead><tr><th>Run</th><th>Model</th><th>Apex</th><th>Gust</th><th>Dist</th></tr></thead>
+                    <tbody id="logBody"><tr><td colspan="5" style="color:var(--muted);text-align:center;">Launch a glider to record 3D telemetry...</td></tr></tbody>
+                  </table>
+                </div>
+                <div class="radar-widget">
+                  <div class="widget-header" style="margin-bottom:2px;"><span>📡 2D Runway Radar</span><span id="crossBadge" style="color:var(--cyan);">Cross: 0.0 mph</span></div>
+                  <canvas id="radarCanvas" width="215" height="130"></canvas>
+                </div>
+                <canvas id="cadCanvas"></canvas>
+                <div id="gameOverUI">
+                  <div class="modal-box">
+                    <h2 style="margin:0;color:var(--gold);font-size:1.65rem;">🛬 VERIFIED FLIGHT RECORD</h2>
+                    <p style="color:var(--text);margin:8px 0 4px;">Cryptographically Signed Peak Distance:</p>
+                    <div style="font-size:2.4rem;font-weight:900;color:var(--mint);font-family:monospace;" id="finalScoreText">0.00 ft</div>
+                    <input type="text" id="playerName" placeholder="Enter Engineer Name..." autocomplete="off">
+                    <div style="display:flex;gap:10px;">
+                      <button class="btn-main" style="flex:1;background:#233345;color:white;" onclick="document.getElementById('gameOverUI').style.display='none'">Resume Lab</button>
+                      <button class="btn-main" style="flex:1;background:var(--gold);color:var(--navy-950);" id="submitScoreBtn">🔒 Transmit</button>
+                    </div>
+                  </div>
+                </div>
+              </main>
+              <script>
+                (() => {
+                  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzMrutUPsSmdMSuRpb-I2kH0PA6WXKRWhoTNeCdlvuiDucQfL2him3YYGx2eX60shzO/exec';
+                  document.addEventListener('contextmenu', e => e.preventDefault());
+                  window.addEventListener('keydown', e => { if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toUpperCase() === 'U')) e.preventDefault(); });
+                  const canvas = document.getElementById('cadCanvas'), ctx = canvas.getContext('2d');
+                  const radarCanvas = document.getElementById('radarCanvas'), rCtx = radarCanvas.getContext('2d');
+                  function resize() { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; drawRadar(); }
+                  window.addEventListener('resize', resize);
+
+                  let orbitYaw = 0.55, orbitPitch = 0.28, isDragging = false, lastMX = 0, lastMY = 0;
+                  canvas.addEventListener('mousedown', e => { isDragging = true; lastMX = e.clientX; lastMY = e.clientY; });
+                  window.addEventListener('mouseup', () => { isDragging = false; });
+                  window.addEventListener('mousemove', e => {
+                    if (!isDragging) return;
+                    orbitYaw += (e.clientX - lastMX) * 0.008;
+                    orbitPitch = Math.max(-0.4, Math.min(1.1, orbitPitch + (e.clientY - lastMY) * 0.006));
+                    lastMX = e.clientX; lastMY = e.clientY;
+                  });
+
+                  let camMode = 'hangar', phase = 'idle';
+                  let angle = 38, power = 82, hoopRatio = 0.65, camber = 3, massG = 1.8, baseWind = 0, baseCross = 0;
+                  let activeGust = 0, activeCross = 0, thermalLift = 0;
+                  let glider = { x: 0, y: 12, z: 0, vx: 0, vy: 0, vz: 0, pitch: 0, roll: 0, yaw: 0 };
+                  let trail = [], ghostData = [], landingSpots = [];
+                  let windStreamlines = Array.from({ length: 48 }, () => ({ x: (Math.random() - 0.5) * 140, y: Math.random() * 55 + 2, z: Math.random() * 400 - 40, len: Math.random() * 14 + 8, spd: Math.random() * 1.4 + 0.8 }));
+                  let stars = Array.from({ length: 110 }, () => ({ x: Math.random(), y: Math.random() * 0.48, r: Math.random() * 1.6 + 0.4 }));
+                  let currentDist = 0, maxApex = 0, hangTime = 0, runCount = 0;
+                  let _bestVault = 0, _vaultChecksum = 0x7F21;
+
+                  function _sign(student, game, score, ts) {
+                    const raw = `${student}|${game}|${Number(score).toFixed(2)}|${ts}|CCC-V5-SALT-9941`;
+                    let h = 0x811c9dc5;
+                    for (let i = 0; i < raw.length; i++) { h ^= raw.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+                    return (h >>> 0).toString(16).padStart(8, '0');
+                  }
+
+                  const archetypes = {
+                    vortex:   { name: 'Vortex Ring (2V)', liftMod: 1.05, dragMod: 0.98, color: '#00f2fe', accent: '#ff4d6d' },
+                    dart:     { name: 'Apex Dart',        liftMod: 0.95, dragMod: 0.88, color: '#ff4d6d', accent: '#ffd166' },
+                    strato:   { name: 'Stratocruiser',    liftMod: 1.12, dragMod: 1.03, color: '#55efc4', accent: '#00f2fe' },
+                    phantom:  { name: 'Phantom Delta',    liftMod: 1.03, dragMod: 0.92, color: '#a855f7', accent: '#00f2fe' },
+                    canard:   { name: 'Sky Canard',       liftMod: 1.08, dragMod: 0.96, color: '#ffd166', accent: '#55efc4' },
+                    valkyrie: { name: 'Valkyrie Wing',    liftMod: 1.15, dragMod: 1.06, color: '#38bdf8', accent: '#e9c46a' }
+                  };
+
+                  let activeMesh = { vertices: [], edges: [], faces: [] };
+                  function buildJSONWireframeMesh() {
+                    const archKey = document.getElementById('archetypeSelect').value, arch = archetypes[archKey];
+                    const V = [], E = [], F = [];
+                    const bendY = z => -Math.pow(z / 10, 2) * (camber * 0.16);
+                    function addStrawTube(xOff, yOff, zStart, zEnd, radius, color) {
+                      const segs = 8, rings = 6, baseIdx = V.length;
+                      for (let r = 0; r <= rings; r++) {
+                        const z = zStart + (zEnd - zStart) * (r / rings), by = yOff + bendY(z);
+                        for (let s = 0; s < segs; s++) {
+                          const a = (s / segs) * Math.PI * 2;
+                          V.push({ x: xOff + Math.cos(a) * radius, y: by + Math.sin(a) * radius, z });
+                          const curr = baseIdx + r * segs + s, nextS = baseIdx + r * segs + ((s + 1) % segs);
+                          E.push({ a: curr, b: nextS, color, w: 1.1 });
+                          if (r < rings) E.push({ a: curr, b: curr + segs, color, w: 1.3 });
+                        }
+                      }
+                    }
+                    function add3DHoop(xCenter, zCenter, radiusX, radiusY, bandWidth, color) {
+                      const segs = 28, frontBase = V.length, z1 = zCenter - bandWidth / 2, z2 = zCenter + bandWidth / 2, by = bendY(zCenter);
+                      for (let s = 0; s < segs; s++) {
+                        const a = (s / segs) * Math.PI * 2, vx = xCenter + Math.cos(a) * radiusX, vy = by + radiusY + Math.sin(a) * radiusY;
+                        V.push({ x: vx, y: vy, z: z1 }, { x: vx, y: vy, z: z2 });
+                        const i1 = frontBase + s * 2, i2 = frontBase + s * 2 + 1, n1 = frontBase + ((s + 1) % segs) * 2, n2 = frontBase + ((s + 1) % segs) * 2 + 1;
+                        E.push({ a: i1, b: n1, color, w: 2.0 }, { a: i2, b: n2, color, w: 2.0 });
+                        if (s % 2 === 0) { E.push({ a: i1, b: i2, color, w: 1.1 }); F.push({ pts: [i1, n1, n2, i2], color }); }
+                      }
+                    }
+                    if (archKey === 'vortex') {
+                      addStrawTube(0, 0, -9, 9, 0.32, arch.accent);
+                      add3DHoop(0, -6.8, 5.2, 4.6, 2.2, arch.color);
+                      add3DHoop(0, 6.8, 5.2 * hoopRatio, 4.6 * hoopRatio, 1.8, arch.color);
+                    } else if (archKey === 'strato') {
+                      addStrawTube(-2.2, 0, -9, 9, 0.26, arch.accent); addStrawTube(2.2, 0, -9, 9, 0.26, arch.accent);
+                      add3DHoop(0, -6.8, 7.2, 4.2, 2.4, arch.color); add3DHoop(0, 6.8, 7.2 * hoopRatio, 4.2 * hoopRatio, 2.0, arch.color);
+                    } else if (archKey === 'valkyrie') {
+                      addStrawTube(0, 0, -10.5, 10.5, 0.35, arch.accent);
+                      add3DHoop(0, -7.8, 5.6, 4.8, 2.2, arch.color);
+                      add3DHoop(-3.6, 0, 3.2, 3.0, 1.8, '#e9c46a'); add3DHoop(3.6, 0, 3.2, 3.0, 1.8, '#e9c46a');
+                      add3DHoop(0, 7.8, 5.2 * hoopRatio, 4.4 * hoopRatio, 1.8, arch.color);
+                    } else {
+                      addStrawTube(0, 0, -9.5, 10.5, 0.3, arch.accent);
+                      const span = (archKey === 'phantom' ? 11.5 : 8.8) * (0.6 + hoopRatio * 0.6), sweepZ = archKey === 'phantom' ? -5.5 : -8.5;
+                      const rows = 8, cols = 6, gridBase = V.length;
+                      for (let r = 0; r <= rows; r++) {
+                        const tZ = r / rows, z = sweepZ + (9.5 - sweepZ) * tZ, localSpan = span * (1 - Math.pow(tZ, 1.25));
+                        for (let c = -cols; c <= cols; c++) {
+                          const fracX = c / cols;
+                          V.push({ x: fracX * localSpan, y: Math.abs(fracX) * (archKey === 'phantom' ? 1.2 : 0.6) + bendY(z), z });
+                        }
+                      }
+                      const stride = cols * 2 + 1;
+                      for (let r = 0; r <= rows; r++) {
+                        for (let c = 0; c < stride; c++) {
+                          const idx = gridBase + r * stride + c;
+                          if (c < stride - 1) E.push({ a: idx, b: idx + 1, color: arch.color, w: r === 0 || r === rows ? 2.0 : 1.0 });
+                          if (r < rows) E.push({ a: idx, b: idx + stride, color: arch.color, w: c === 0 || c === stride - 1 ? 2.2 : 1.0 });
+                        }
+                      }
+                      [-2.2, 2.2].forEach(fx => {
+                        const b = V.length;
+                        V.push({ x: fx, y: 0, z: -8.5 }, { x: fx, y: 0, z: -4.0 }, { x: fx, y: 3.8, z: -7.5 });
+                        E.push({ a: b, b: b + 1, color: arch.accent, w: 1.8 }, { a: b + 1, b: b + 2, color: arch.accent, w: 1.8 }, { a: b + 2, b: b, color: arch.accent, w: 1.8 });
+                        F.push({ pts: [b, b + 1, b + 2], color: arch.accent });
+                      });
+                      if (archKey === 'canard') {
+                        const cb = V.length, cSpan = 4.8 * hoopRatio;
+                        V.push({ x: 0, y: bendY(8.5), z: 8.5 }, { x: -cSpan, y: bendY(6.2) + 0.5, z: 6.2 }, { x: 0, y: bendY(5.5), z: 5.5 }, { x: cSpan, y: bendY(6.2) + 0.5, z: 6.2 });
+                        E.push({ a: cb, b: cb + 1, color: '#55efc4', w: 2.0 }, { a: cb + 1, b: cb + 2, color: '#55efc4', w: 2.0 }, { a: cb + 2, b: cb + 3, color: '#55efc4', w: 2.0 }, { a: cb + 3, b: cb, color: '#55efc4', w: 2.0 });
+                        F.push({ pts: [cb, cb + 1, cb + 2, cb + 3], color: '#55efc4' });
+                      }
+                    }
+                    activeMesh = { vertices: V, edges: E, faces: F };
+                    document.getElementById('meshVertCount').innerText = `${V.length} Vertices / ${E.length} Wireframe Edges`;
+                  }
+
+                  document.getElementById('archetypeSelect').onchange = e => { document.getElementById('hudArchName').innerText = archetypes[e.target.value].name; buildJSONWireframeMesh(); };
+                  document.getElementById('angleSlider').oninput = e => { angle = +e.target.value; document.getElementById('angleVal').innerText = angle + '°'; };
+                  document.getElementById('powerSlider').oninput = e => { power = +e.target.value; document.getElementById('powerVal').innerText = power + '%'; };
+                  document.getElementById('hoopSlider').oninput = e => {
+                    hoopRatio = +e.target.value / 100;
+                    document.getElementById('hoopVal').innerText = hoopRatio.toFixed(2) + (Math.abs(hoopRatio - 0.65) < 0.05 ? ' (Optimal)' : '');
+                    document.getElementById('hudStab').innerText = Math.max(60, 100 - Math.abs(hoopRatio - 0.65) * 85).toFixed(1) + '%';
+                    buildJSONWireframeMesh();
+                  };
+                  document.getElementById('camberSlider').oninput = e => { camber = +e.target.value; document.getElementById('camberVal').innerText = (camber >= 0 ? '+' : '') + camber + '° Lift'; buildJSONWireframeMesh(); };
+                  document.getElementById('massSlider').oninput = e => { massG = +e.target.value / 10; document.getElementById('massVal').innerText = massG.toFixed(1) + ' g'; };
+                  document.getElementById('windSlider').oninput = e => { baseWind = +e.target.value; document.getElementById('windVal').innerText = (baseWind >= 0 ? '+' : '') + baseWind + ' mph'; };
+                  document.getElementById('crossSlider').oninput = e => { baseCross = +e.target.value; document.getElementById('crossVal').innerText = (baseCross >= 0 ? 'R ' : 'L ') + Math.abs(baseCross) + ' mph'; };
+
+                  window.setCamera = (c, btn) => { camMode = c; document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active')); if (btn) btn.classList.add('active'); };
+                  document.getElementById('hangarBtn').onclick = () => {
+                    phase = 'idle'; glider = { x: 0, y: 12, z: 0, vx: 0, vy: 0, vz: 0, pitch: (angle * Math.PI) / 180, roll: 0, yaw: 0 };
+                    document.getElementById('launchBtn').disabled = false; setCamera('hangar', document.getElementById('btnCamHangar'));
+                    showBanner('📐 360° HANGAR BLUEPRINT INSPECTION', '#00f2fe');
+                  };
+                  window.clearGhosts = () => { ghostData = []; landingSpots = []; runCount = 0; document.getElementById('logBody').innerHTML = `<tr><td colspan="5" style="color:var(--muted);text-align:center;">Ghost history cleared.</td></tr>`; drawRadar(); };
+                  function showBanner(text, color = '#00f2fe') { const jb = document.getElementById('jumbotron'); jb.innerText = text; jb.style.borderColor = color; jb.style.color = color; jb.classList.add('show'); setTimeout(() => jb.classList.remove('show'), 2200); }
+
+                  function projectWorld3D(wx, wy, wz) {
+                    const W = canvas.width, H = canvas.height, fov = 560;
+                    if (camMode === 'hangar') {
+                      const rx = wx - glider.x, ry = wy - glider.y, rz = wz - glider.z;
+                      const cosY = Math.cos(orbitYaw), sinY = Math.sin(orbitYaw), cosP = Math.cos(orbitPitch), sinP = Math.sin(orbitPitch);
+                      const x1 = rx * cosY - rz * sinY, z1 = rz * cosY + rx * sinY, y2 = ry * cosP - z1 * sinP, z2 = z1 * cosP + ry * sinP + 36;
+                      if (z2 <= 1) return { x: 0, y: 0, s: 0, visible: false };
+                      const s = fov / z2; return { x: W / 2 + x1 * s, y: H * 0.54 - y2 * s, s, visible: true };
+                    }
+                    if (camMode === 'top') { const scale = Math.min(W, H) / 1100; return { x: W / 2 + wx * scale * 2.5, y: H * 0.90 - wz * scale, s: scale * 2.2, visible: true }; }
+                    if (camMode === 'side') { const scale = W / 1100; return { x: W * 0.08 + wz * scale, y: H * 0.76 - wy * scale * 2.2, s: scale * 2.5, visible: true }; }
+                    let camX = 0, camY = 22, camZ = -45;
+                    if (camMode === 'chase') { camX = glider.x * 0.85; camY = Math.max(14, glider.y + 12); camZ = glider.z - 38; }
+                    else if (camMode === 'follow') { camX = glider.x * 0.5; camY = Math.max(18, glider.y * 0.5 + 18); camZ = Math.max(-45, glider.z * 0.4 - 55); }
+                    const dx = wx - camX, dy = wy - camY, dz = wz - camZ;
+                    if (dz <= 1) return { x: 0, y: 0, s: 0, visible: false };
+                    const scale = fov / dz; return { x: W / 2 + dx * scale, y: H * 0.64 - dy * scale, s: scale, visible: true };
+                  }
+
+                  function transformVertex(v, g) {
+                    const cosP = Math.cos(g.pitch), sinP = Math.sin(g.pitch), cosR = Math.cos(g.roll), sinR = Math.sin(g.roll);
+                    const x1 = v.x * cosR - v.y * sinR, y1 = v.y * cosR + v.x * sinR;
+                    return { x: g.x + x1, y: g.y + (y1 * cosP + v.z * sinP), z: g.z + (v.z * cosP - y1 * sinP) };
+                  }
+
+                  function launchGlider() {
+                    if (phase === 'flight') return;
+                    phase = 'flight'; document.getElementById('launchBtn').disabled = true;
+                    if (camMode === 'hangar') setCamera('chase', document.getElementById('btnCamChase'));
+                    activeGust = +(baseWind + (Math.random() - 0.47) * 11.5).toFixed(1);
+                    activeCross = +(baseCross + (Math.random() - 0.5) * 9.5).toFixed(1);
+                    thermalLift = +((Math.random() - 0.42) * 2.8).toFixed(2);
+                    document.getElementById('hudGust').innerText = (activeGust >= 0 ? '+' : '') + activeGust + ' mph';
+                    document.getElementById('crossBadge').innerText = `Cross: ${activeCross >= 0 ? 'R ' : 'L '}${Math.abs(activeCross)} mph`;
+                    document.getElementById('hudThermal').innerText = thermalLift > 0.4 ? 'Thermal: Updraft ⬆️' : (thermalLift < -0.4 ? 'Thermal: Downdraft ⬇️' : 'Thermal: Neutral');
+                    const rad = (angle * Math.PI) / 180, v0 = (power * 1.42) * Math.pow(1.8 / massG, 0.3);
+                    glider = { x: 0, y: 12, z: 0, vx: 0, vy: Math.sin(rad) * v0, vz: Math.cos(rad) * v0, pitch: rad, roll: 0, yaw: 0 };
+                    trail = []; maxApex = 12; hangTime = 0;
+                    showBanner('✈️ 3D WIREFRAME AIRFRAME LAUNCHED!', '#e9c46a');
+                  }
+                  document.getElementById('launchBtn').onclick = launchGlider;
+                  window.addEventListener('keydown', e => { if (e.code === 'Space' && phase !== 'flight') { e.preventDefault(); launchGlider(); } });
+
+                  function recordFlight(finalDist) {
+                    runCount++;
+                    const colors = ['#00f2fe', '#55efc4', '#ffd166', '#a855f7', '#ff4d6d', '#38bdf8'], color = colors[(runCount - 1) % colors.length];
+                    ghostData.push({ points: [...trail], color }); if (ghostData.length > 6) ghostData.shift();
+                    landingSpots.push({ x: glider.x, z: glider.z, color }); drawRadar();
+                    const modelShort = archetypes[document.getElementById('archetypeSelect').value].name.split(' ')[0];
+                    const row = `<tr><td style="color:${color};font-weight:bold;">#${runCount}</td><td>${modelShort}</td><td>${maxApex.toFixed(1)}ft</td><td>${activeGust >= 0 ? '+' : ''}${activeGust}</td><td style="color:var(--gold);font-weight:bold;">${finalDist.toFixed(2)}ft</td></tr>`;
+                    const tbody = document.getElementById('logBody');
+                    tbody.innerHTML = runCount === 1 ? row : row + tbody.innerHTML.split('</tr>').slice(0, 4).join('</tr>');
+                  }
+
+                  function drawRadar() {
+                    const W = radarCanvas.width, H = radarCanvas.height; rCtx.clearRect(0, 0, W, H);
+                    const cx = W / 2, botY = H - 10, scaleZ = (H - 20) / 1100, scaleX = (W - 30) / 300;
+                    rCtx.strokeStyle = 'rgba(0,242,254,0.28)'; rCtx.lineWidth = 1;
+                    rCtx.beginPath(); rCtx.moveTo(cx, botY); rCtx.lineTo(cx, 10); rCtx.stroke();
+                    [250, 500, 750, 1000].forEach(d => { const y = botY - d * scaleZ; rCtx.beginPath(); rCtx.moveTo(20, y); rCtx.lineTo(W - 20, y); rCtx.stroke(); });
+                    landingSpots.forEach(pt => { rCtx.fillStyle = pt.color; rCtx.beginPath(); rCtx.arc(cx + pt.x * scaleX, botY - pt.z * scaleZ, 3.8, 0, Math.PI * 2); rCtx.fill(); });
+                  }
+
+                  function animate() {
+                    const dt = 1 / 60, W = canvas.width, H = canvas.height;
+                    ctx.clearRect(0, 0, W, H);
+                    if (camMode === 'hangar' && !isDragging && phase !== 'flight') { orbitYaw += 0.0055; glider.pitch = (angle * Math.PI) / 180 * 0.35; }
+                    if (camMode !== 'top') { ctx.fillStyle = 'rgba(255,255,255,0.55)'; stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2); ctx.fill(); }); }
+                    for (let z = -40; z <= 1100; z += 50) {
+                      const pL = projectWorld3D(-80, 0, z), pR = projectWorld3D(80, 0, z);
+                      if (pL.visible && pR.visible) {
+                        ctx.strokeStyle = z % 200 === 0 ? 'rgba(233,196,106,0.55)' : 'rgba(0,242,254,0.16)';
+                        ctx.lineWidth = z % 200 === 0 ? 1.8 : 0.9;
+                        ctx.beginPath(); ctx.moveTo(pL.x, pL.y); ctx.lineTo(pR.x, pR.y); ctx.stroke();
+                        if (z > 0 && z % 200 === 0) {
+                          const pTL = projectWorld3D(-80, 32, z), pTR = projectWorld3D(80, 32, z);
+                          ctx.strokeStyle = 'rgba(0,242,254,0.35)'; ctx.lineWidth = 1.5;
+                          ctx.beginPath(); ctx.moveTo(pL.x, pL.y); ctx.lineTo(pTL.x, pTL.y); ctx.lineTo(pTR.x, pTR.y); ctx.lineTo(pR.x, pR.y); ctx.stroke();
+                          ctx.fillStyle = '#e9c46a'; ctx.font = 'bold 11px monospace'; ctx.fillText(`${z} FT`, pTL.x + 6, pTL.y + 14);
+                        }
+                      }
+                    }
+                    [-80, -40, 0, 40, 80].forEach(xLane => {
+                      ctx.beginPath(); ctx.strokeStyle = xLane === 0 ? 'rgba(233,196,106,0.65)' : 'rgba(0,242,254,0.15)'; ctx.lineWidth = xLane === 0 ? 2 : 1;
+                      for (let z = -40; z <= 1100; z += 40) { const p = projectWorld3D(xLane, 0, z); if (p.visible) { if (z === -40) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y); } }
+                      ctx.stroke();
+                    });
+                    ctx.strokeStyle = 'rgba(0,242,254,0.25)'; ctx.lineWidth = 1.2;
+                    windStreamlines.forEach(ws => {
+                      ws.z -= ws.spd * (1.2 - baseWind * 0.03); if (ws.z < glider.z - 50) ws.z = glider.z + 260;
+                      const p1 = projectWorld3D(ws.x, ws.y, ws.z), p2 = projectWorld3D(ws.x + baseCross * 0.3, ws.y, ws.z + ws.len);
+                      if (p1.visible && p2.visible) { ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); }
+                    });
+
+                    if (phase === 'flight') {
+                      hangTime += dt;
+                      const arch = archetypes[document.getElementById('archetypeSelect').value];
+                      const hoopEfficiency = Math.max(0.55, 1 - Math.abs(hoopRatio - 0.65) * 1.15);
+                      const camberLift = (camber * 1.45) * hoopEfficiency * arch.liftMod;
+                      const microWave = Math.sin(hangTime * 5.2) * 1.25;
+                      const gravity = 26.5 * (massG / 1.8), drag = Math.pow(0.9935, arch.dragMod);
+                      glider.vz = (glider.vz * drag) + (activeGust * 0.085);
+                      glider.vx = (glider.vx * 0.985) + (activeCross * 0.075);
+                      glider.vy = (glider.vy * drag) + (camberLift + thermalLift + microWave - gravity) * dt;
+                      glider.x += glider.vx * dt * 3.2; glider.y += glider.vy * dt * 2.2; glider.z += glider.vz * dt * 3.4;
+                      glider.pitch = Math.atan2(glider.vy, glider.vz); glider.roll = Math.max(-0.55, Math.min(0.55, glider.vx * 0.04));
+                      if (glider.y > maxApex) maxApex = glider.y;
+                      trail.push({ x: glider.x, y: glider.y, z: glider.z }); if (trail.length > 220) trail.shift();
+                      currentDist = Math.max(0, glider.z - Math.abs(glider.x) * 0.12);
+                      const airspeed = Math.sqrt(glider.vz * glider.vz + glider.vy * glider.vy);
+                      document.getElementById('hudDist').innerText = currentDist.toFixed(2) + ' ft';
+                      document.getElementById('hudDrift').innerText = `Drift: ${glider.x >= 0 ? 'R ' : 'L '}${Math.abs(glider.x).toFixed(1)} ft`;
+                      document.getElementById('hudSpeed').innerText = airspeed.toFixed(1) + ' ft/s';
+                      document.getElementById('hudLD').innerText = `L/D Efficiency: ${(hoopEfficiency * 100).toFixed(0)}%`;
+                      document.getElementById('hudApex').innerText = maxApex.toFixed(1) + ' ft';
+                      document.getElementById('hudHang').innerText = `Airtime: ${hangTime.toFixed(2)} s`;
+
+                      const hasLanded = (glider.y <= 0) || (currentDist >= 1200) || (hangTime >= 60);
+                      if (hasLanded) {
+                        glider.y = 0; phase = 'landed'; document.getElementById('launchBtn').disabled = false;
+                        const finalScore = Number(currentDist.toFixed(2));
+                        recordFlight(finalScore);
+                        document.getElementById('hudFlights').innerText = `Flights: ${runCount}`;
+                        if (finalScore > _bestVault) {
+                          _bestVault = finalScore; _vaultChecksum = Math.round(finalScore * 100) ^ 0x7F21;
+                          document.getElementById('hudBest').innerText = _bestVault.toFixed(2) + ' ft';
+                          document.getElementById('bestBtnText').innerText = _bestVault.toFixed(2);
+                          showBanner(`🏆 NEW LAB RECORD: ${_bestVault.toFixed(2)} FT!`, '#e9c46a');
+                        } else showBanner(`🛬 TOUCHDOWN: ${finalScore.toFixed(2)} FT`, '#55efc4');
+                      }
+                    }
+
+                    ghostData.forEach(gt => {
+                      ctx.beginPath(); ctx.strokeStyle = gt.color; ctx.globalAlpha = 0.42; ctx.lineWidth = 2;
+                      gt.points.forEach((pt, idx) => { const tp = projectWorld3D(pt.x, pt.y, pt.z); if (tp.visible) { if (idx === 0) ctx.moveTo(tp.x, tp.y); else ctx.lineTo(tp.x, tp.y); } });
+                      ctx.stroke(); ctx.globalAlpha = 1.0;
+                    });
+                    if (trail.length > 1) {
+                      ctx.beginPath(); ctx.strokeStyle = '#e9c46a'; ctx.lineWidth = 3.2;
+                      trail.forEach((pt, idx) => { const tp = projectWorld3D(pt.x, pt.y, pt.z); if (tp.visible) { if (idx === 0) ctx.moveTo(tp.x, tp.y); else ctx.lineTo(tp.x, tp.y); } });
+                      ctx.stroke();
+                    }
+                    const projectedVerts = activeMesh.vertices.map(v => { const tv = transformVertex(v, glider); return projectWorld3D(tv.x, tv.y, tv.z); });
+                    const shadowCenter = projectWorld3D(glider.x, 0, glider.z);
+                    if (shadowCenter.visible) { ctx.fillStyle = 'rgba(0,0,0,0.45)'; ctx.beginPath(); ctx.ellipse(shadowCenter.x, shadowCenter.y, Math.max(8, 5.5 * shadowCenter.s), Math.max(3, 2.2 * shadowCenter.s), 0, 0, Math.PI * 2); ctx.fill(); }
+                    activeMesh.faces.forEach(f => {
+                      const pts = f.pts.map(idx => projectedVerts[idx]);
+                      if (pts.every(p => p && p.visible)) { ctx.fillStyle = 'rgba(0,242,254,0.14)'; ctx.beginPath(); pts.forEach((p, i) => i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)); ctx.closePath(); ctx.fill(); }
+                    });
+                    activeMesh.edges.forEach(e => {
+                      const p1 = projectedVerts[e.a], p2 = projectedVerts[e.b];
+                      if (p1 && p2 && p1.visible && p2.visible) { ctx.strokeStyle = e.color; ctx.lineWidth = e.w; ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke(); }
+                    });
+                    const cgWorld = transformVertex({ x: 0, y: 0, z: (massG - 1.8) * 1.8 }, glider), pCG = projectWorld3D(cgWorld.x, cgWorld.y, cgWorld.z);
+                    if (pCG.visible) { ctx.fillStyle = '#ffd166'; ctx.beginPath(); ctx.arc(pCG.x, pCG.y, Math.max(4, 0.45 * pCG.s), 0, Math.PI * 2); ctx.fill(); }
+                    requestAnimationFrame(animate);
+                  }
+
+                  document.getElementById('openSubmitBtn').onclick = () => {
+                    document.getElementById('finalScoreText').innerText = _bestVault.toFixed(2) + ' ft';
+                    document.getElementById('gameOverUI').style.display = 'flex';
+                  };
+                  document.getElementById('submitScoreBtn').onclick = () => {
+                    const pName = document.getElementById('playerName').value.trim();
+                    if (!pName) return alert('Please enter an Engineer Name.');
+                    const btn = document.getElementById('submitScoreBtn');
+                    btn.disabled = true; btn.innerText = '⏳ Transmitting...';
+                    const verifiedScore = Number((((Math.round(_bestVault * 100) ^ 0x7F21) === _vaultChecksum) ? _bestVault : 0).toFixed(2));
+                    const ts = Date.now(), sig = _sign(pName, 'AeroLab Glider', verifiedScore, ts);
+                    const payload = { type: 'GAME_OVER', student: pName, game: 'AeroLab Glider', score: verifiedScore, ts, sig, migratedByChild: true };
+                    try { const bc = new BroadcastChannel('captains_code_channel'); bc.postMessage(payload); } catch(e) {}
+                    try { if (window.opener) window.opener.postMessage(payload, '*'); } catch(e) {}
+                    fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ student: pName, game: 'AeroLab Glider', score: verifiedScore, ts, sig }) })
+                      .catch(() => {})
+                      .finally(() => {
+                        btn.innerText = '✅ Score Logged!';
+                        setTimeout(() => { window.close(); document.getElementById('gameOverUI').style.display = 'none'; btn.disabled = false; btn.innerText = '🔒 Transmit'; }, 500);
+                      });
+                  };
+                  resize(); buildJSONWireframeMesh(); animate();
+                })();
+              </script>
+            </body>
+            </html>
+          </template>
+          <button class="project-link launch-newtab-btn" type="button" data-template-id="game-template-2">✈️ Launch AeroLab 3D PRO ↗</button>
+        </article>
+
+        <!-- GAME 3: AEROBAT 3D PRO -->
+        <article class="project-card" data-category="engineering" data-search="aerobat 3d pro baseball statcast physics simulator home run derby">
+          <div class="project-top"><div class="project-symbol">⚾</div><span class="tag">6-DoF Physics</span></div>
+          <h3>AeroBat 3D PRO: Statcast Lab</h3>
+          <p>6-DoF baseball collision & Magnus spin lab with Engineering, Arcade Live, and 10-Pitch Derby modes.</p>
+          <div class="top-score-badge" id="badge-baseball">
+            <div><span class="top-score-label">🔒 Verified Home Run Record</span><div class="top-score-holder" id="holder-baseball">Awaiting Batter...</div></div>
+            <div class="top-score-val" id="score-baseball">0.00 ft</div>
+          </div>
+          <template id="game-template-3">
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>AeroBat 3D PRO | Algorithmic Flight & Collision Lab</title>
+              <style>
+                :root { --navy-950:#040b16; --navy-900:#071426; --navy-800:#0b2545; --navy-700:#12385d; --blue-600:#1d6384; --cyan:#00f2fe; --mint:#55efc4; --gold:#e9c46a; --gold-bright:#ffd166; --coral:#ff4d6d; --purple:#a855f7; --text:#e2eff7; --muted:#8fa6bc; }
+                * { box-sizing:border-box; user-select:none; }
+                body { margin:0; display:flex; height:100vh; width:100vw; overflow:hidden; background:var(--navy-950); color:var(--text); font-family:'Inter',system-ui,sans-serif; }
+                #console { width:430px; min-width:430px; height:100vh; background:linear-gradient(180deg,var(--navy-800) 0%,var(--navy-900) 100%); border-right:2px solid rgba(233,196,106,0.45); box-shadow:10px 0 35px rgba(0,0,0,0.75); display:flex; flex-direction:column; padding:18px 20px; gap:12px; z-index:20; overflow-y:auto; }
+                #console::-webkit-scrollbar { width:8px; } #console::-webkit-scrollbar-thumb { background:rgba(233,196,106,0.4); border-radius:4px; }
+                .console-header { display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid rgba(255,255,255,0.15); padding-bottom:10px; }
+                .console-title { font-size:1.35rem; font-weight:900; color:var(--gold); letter-spacing:0.06em; text-transform:uppercase; margin:0; display:flex; align-items:center; gap:8px; }
+                .badge-pro { background:linear-gradient(135deg,rgba(0,242,254,0.2),rgba(85,239,196,0.2)); border:1px solid var(--cyan); color:var(--cyan); font-size:0.78rem; font-weight:900; padding:4px 10px; border-radius:99px; letter-spacing:0.08em; }
+                .mode-switch { display:grid; grid-template-columns:1fr 1fr 1fr; background:var(--navy-950); padding:4px; border-radius:10px; border:1px solid rgba(255,255,255,0.12); gap:4px; }
+                .mode-btn { padding:9px 6px; text-align:center; font-weight:800; font-size:0.86rem; border-radius:7px; cursor:pointer; color:var(--muted); transition:0.2s; text-transform:uppercase; letter-spacing:0.04em; }
+                .mode-btn.active { background:var(--gold); color:var(--navy-950); box-shadow:0 3px 10px rgba(233,196,106,0.35); }
+                .section-tag { font-size:0.82rem; text-transform:uppercase; letter-spacing:0.12em; color:var(--cyan); font-weight:900; margin-top:4px; display:flex; justify-content:space-between; align-items:center; }
+                .control-card { background:rgba(18,56,93,0.52); border:1px solid rgba(255,255,255,0.12); border-radius:10px; padding:12px 14px; display:flex; flex-direction:column; gap:8px; }
+                .control-card.disabled { opacity:0.28; pointer-events:none; }
+                .control-row { display:flex; justify-content:space-between; align-items:center; font-size:0.95rem; font-weight:700; color:#eaf4fc; }
+                .val-tag { font-family:'Courier New',monospace; font-weight:900; color:var(--gold); font-size:1.02rem; }
+                input[type="range"] { width:100%; height:7px; accent-color:var(--gold); cursor:pointer; margin:2px 0 4px; }
+                .select-grid { display:grid; grid-template-columns:1fr 1fr; gap:8px; }
+                select.cots-select { width:100%; padding:8px 10px; border-radius:7px; background:var(--navy-950); color:white; border:1px solid rgba(233,196,106,0.45); font-weight:700; font-size:0.9rem; outline:none; cursor:pointer; }
+                .cam-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:6px; }
+                .cam-btn { background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.16); color:var(--text); padding:9px 6px; border-radius:7px; font-size:0.84rem; font-weight:800; cursor:pointer; transition:0.15s; text-align:center; }
+                .cam-btn.active,.cam-btn:hover { border-color:var(--cyan); color:var(--cyan); background:rgba(0,242,254,0.16); }
+                .action-bar { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:auto; padding-top:6px; }
+                .btn-main { border:none; padding:14px 12px; border-radius:9px; font-weight:900; font-size:1.02rem; text-transform:uppercase; letter-spacing:0.06em; cursor:pointer; transition:0.18s; }
+                #pitchBtn { background:linear-gradient(135deg,#1d6384,#00a8cc); color:white; box-shadow:0 5px 15px rgba(0,168,204,0.3); }
+                #swingBtn { background:linear-gradient(135deg,var(--gold),#f4a261); color:var(--navy-950); box-shadow:0 5px 15px rgba(233,196,106,0.35); }
+                .btn-main:disabled { background:#233345 !important; color:#576b80 !important; box-shadow:none !important; cursor:not-allowed; }
+                .btn-save { grid-column:1 / -1; background:rgba(85,239,196,0.16); border:1px solid var(--mint); color:var(--mint); padding:11px; border-radius:8px; font-weight:800; font-size:0.92rem; cursor:pointer; }
+                .btn-save:hover { background:var(--mint); color:var(--navy-950); }
+                #viewport { flex-grow:1; position:relative; overflow:hidden; background:radial-gradient(circle at 50% 22%,#163e66 0%,#07172d 62%,#030914 100%); }
+                canvas#simCanvas { display:block; width:100%; height:100%; }
+                .hud-top { position:absolute; top:14px; left:16px; right:16px; display:grid; grid-template-columns:repeat(6,1fr); gap:10px; pointer-events:none; z-index:10; }
+                .stat-box { background:rgba(4,11,22,0.84); backdrop-filter:blur(8px); border:1px solid rgba(0,242,254,0.25); border-top:3px solid var(--cyan); border-radius:9px; padding:9px 12px; }
+                .stat-box.gold { border-top-color:var(--gold); } .stat-box.mint { border-top-color:var(--mint); }
+                .stat-label { font-size:0.68rem; font-weight:800; color:var(--muted); letter-spacing:0.1em; text-transform:uppercase; }
+                .stat-value { font-family:'Courier New',monospace; font-size:1.3rem; font-weight:900; color:white; margin-top:2px; }
+                .stat-sub { font-size:0.72rem; color:var(--cyan); font-family:monospace; }
+                .stat-box.gold .stat-value { color:var(--gold); } .stat-box.mint .stat-value { color:var(--mint); }
+                #jumbotron { position:absolute; top:105px; left:50%; transform:translateX(-50%); padding:10px 28px; border-radius:99px; font-weight:900; font-size:1.2rem; letter-spacing:0.12em; text-transform:uppercase; pointer-events:none; opacity:0; transition:0.22s; z-index:12; background:rgba(7,20,38,0.92); border:2px solid var(--gold); color:var(--gold); }
+                #jumbotron.show { opacity:1; transform:translateX(-50%) scale(1.04); }
+                .run-log-widget { position:absolute; bottom:16px; left:16px; width:340px; background:rgba(4,11,22,0.88); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,0.16); border-radius:11px; padding:12px 14px; z-index:10; font-size:0.8rem; }
+                .widget-header { display:flex; justify-content:space-between; align-items:center; font-weight:900; color:var(--gold); letter-spacing:0.08em; margin-bottom:8px; text-transform:uppercase; font-size:0.76rem; }
+                .clear-btn { background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.25); color:var(--text); font-size:0.7rem; font-weight:700; padding:3px 8px; border-radius:5px; cursor:pointer; }
+                .log-table { width:100%; border-collapse:collapse; font-family:monospace; font-size:0.8rem; }
+                .log-table th { text-align:left; color:var(--muted); border-bottom:1px solid rgba(255,255,255,0.12); padding-bottom:4px; }
+                .log-table td { padding:4px 0; border-bottom:1px solid rgba(255,255,255,0.06); }
+                .radar-widget { position:absolute; bottom:16px; right:16px; width:240px; background:rgba(4,11,22,0.88); backdrop-filter:blur(6px); border:1px solid rgba(0,242,254,0.25); border-radius:11px; padding:12px 14px; z-index:10; font-size:0.8rem; display:flex; flex-direction:column; gap:6px; }
+                #sprayCanvas { width:100%; height:130px; background:rgba(11,37,69,0.55); border-radius:7px; border:1px solid rgba(255,255,255,0.08); }
+                #gameOverUI { position:absolute; inset:0; background:rgba(4,11,22,0.9); backdrop-filter:blur(8px); display:none; flex-direction:column; align-items:center; justify-content:center; z-index:30; }
+                .modal-box { background:var(--navy-800); border:2px solid var(--gold); border-radius:16px; padding:32px 40px; text-align:center; width:440px; box-shadow:0 25px 65px rgba(0,0,0,0.85); }
+                .modal-box input { width:100%; padding:12px; border-radius:8px; border:1px solid var(--cyan); background:var(--navy-950); color:white; font-size:1.1rem; text-align:center; margin:16px 0; outline:none; }
+              </style>
+            </head>
+            <body>
+              <aside id="console">
+                <div class="console-header"><h1 class="console-title">⚾ AeroBat 3D</h1><span class="badge-pro">6-DoF STATCAST LAB</span></div>
+                <div class="section-tag"><span>1. Operating Mode</span><span id="derbyCounter" style="color:var(--gold);"></span></div>
+                <div class="mode-switch">
+                  <div id="modeEng" class="mode-btn active" onclick="setMode('engineering')">Engineering</div>
+                  <div id="modeArc" class="mode-btn" onclick="setMode('arcade')">Arcade Live</div>
+                  <div id="modeDer" class="mode-btn" onclick="setMode('derby')">10-Out Derby</div>
+                </div>
+                <div class="section-tag"><span>2. Bat Material & Collision Mechanics</span></div>
+                <div class="control-card">
+                  <div class="select-grid">
+                    <div>
+                      <div class="control-row" style="margin-bottom:4px;font-size:0.86rem;"><span>Bat Composition</span></div>
+                      <select id="batMaterial" class="cots-select" onchange="updatePhysicsPreview()">
+                        <option value="wood">Maple Wood (0.50)</option>
+                        <option value="bbcor" selected>BBCOR Alloy (0.52)</option>
+                        <option value="carbon">Carbon Comp (0.55)</option>
+                        <option value="titanium">Lab Titanium (0.60)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <div class="control-row" style="margin-bottom:4px;font-size:0.86rem;"><span>Stadium Profile</span></div>
+                      <select id="stadiumPreset" class="cots-select" onchange="applyStadiumPreset()">
+                        <option value="erie" selected>Erie, PA (680 ft)</option>
+                        <option value="denver">Denver, CO (5280 ft)</option>
+                        <option value="miami">Miami, FL (10 ft)</option>
+                        <option value="sf">San Fran, CA (Cold)</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control-row"><span>Bat Mass (MOI Inertia)</span><span class="val-tag" id="massVal">32 oz</span></div>
+                  <input type="range" id="massSlider" min="27" max="42" value="32" step="1">
+                  <div class="control-row"><span>Rotational Swing Effort</span><span class="val-tag" id="powerVal">88%</span></div>
+                  <input type="range" id="powerSlider" min="40" max="100" value="88" step="1">
+                  <div class="control-row"><span>Attack Angle (Swing Plane)</span><span class="val-tag" id="angleVal">24°</span></div>
+                  <input type="range" id="angleSlider" min="-5" max="50" value="24" step="1">
+                  <div class="control-row"><span>Horizontal Spray Angle</span><span class="val-tag" id="sprayVal">0° (Center)</span></div>
+                  <input type="range" id="spraySlider" min="-42" max="42" value="0" step="1">
+                </div>
+                <div class="section-tag"><span>3. Spin Magnus & Timing Precision</span></div>
+                <div class="control-card" id="engPrecisionCard">
+                  <div class="control-row"><span>Barrel Offset (Under/Over)</span><span class="val-tag" id="offsetVal">+12 mm (Backspin)</span></div>
+                  <input type="range" id="offsetSlider" min="-25" max="35" value="12" step="1">
+                  <div class="control-row"><span>Auto-Swing Trigger Delay</span><span class="val-tag" id="delayVal">425 ms</span></div>
+                  <input type="range" id="delaySlider" min="220" max="720" value="425" step="5">
+                </div>
+                <div class="section-tag"><span>4. Pitch Kinematics & Atmospherics</span></div>
+                <div class="control-card">
+                  <div class="select-grid">
+                    <div>
+                      <div class="control-row" style="margin-bottom:4px;font-size:0.86rem;"><span>Pitch Arsenal</span></div>
+                      <select id="pitchType" class="cots-select">
+                        <option value="fastball">4-Seam Fast (95 mph)</option>
+                        <option value="curveball">12-6 Curve (79 mph)</option>
+                        <option value="slider">Gyro Slider (87 mph)</option>
+                        <option value="changeup">Changeup (83 mph)</option>
+                        <option value="knuckle">Knuckleball (68 mph)</option>
+                      </select>
+                    </div>
+                    <div>
+                      <div class="control-row" style="margin-bottom:4px;font-size:0.86rem;"><span>Air Temp: <span id="tempVal" class="val-tag">72°F</span></span></div>
+                      <input type="range" id="tempSlider" min="40" max="105" value="72" step="1" style="margin-top:10px;">
+                    </div>
+                  </div>
+                  <div class="control-row"><span>Base Wind Vector</span><span class="val-tag" id="windVal">0 mph</span></div>
+                  <input type="range" id="windSlider" min="-25" max="25" value="0" step="1">
+                </div>
+                <div class="section-tag"><span>5. 3D Viewport Camera</span></div>
+                <div class="cam-grid">
+                  <button class="cam-btn active" onclick="setCamera('catcher', this)">Catcher</button>
+                  <button class="cam-btn" onclick="setCamera('follow', this)">Tracker</button>
+                  <button class="cam-btn" onclick="setCamera('side', this)">Profile</button>
+                  <button class="cam-btn" onclick="setCamera('top', this)">Overhead</button>
+                </div>
+                <div class="action-bar">
+                  <button id="pitchBtn" class="btn-main">Simulate</button>
+                  <button id="swingBtn" class="btn-main" disabled>Swing [Space]</button>
+                  <button id="openSubmitBtn" class="btn-save">🔒 Sign & Export Score (<span id="bestBtnText">0.00</span> ft)</button>
+                </div>
+              </aside>
+              <main id="viewport">
+                <div class="hud-top">
+                  <div class="stat-box gold"><div class="stat-label">Flight Distance</div><div class="stat-value" id="hudDist">0.00 ft</div><div class="stat-sub" id="hudCarry">Carry vs Roll</div></div>
+                  <div class="stat-box"><div class="stat-label">Exit Velocity</div><div class="stat-value" id="hudExit">0.0 mph</div><div class="stat-sub" id="hudLaunchAngle">Launch: --°</div></div>
+                  <div class="stat-box"><div class="stat-label">Backspin Rate</div><div class="stat-value" id="hudSpin">0 rpm</div><div class="stat-sub" id="hudSpinType">Magnus Lift</div></div>
+                  <div class="stat-box"><div class="stat-label">Apex / Hang</div><div class="stat-value" id="hudApex">0.0 ft</div><div class="stat-sub" id="hudHang">Hang: 0.00 s</div></div>
+                  <div class="stat-box mint"><div class="stat-label">Air Density (ρ)</div><div class="stat-value" id="hudRho">1.18 kg/m³</div><div class="stat-sub" id="hudAlt">Alt: 680 ft</div></div>
+                  <div class="stat-box gold"><div class="stat-label" id="recordLabel">Lab Best</div><div class="stat-value" id="hudBest">0.00 ft</div><div class="stat-sub" id="hudHRCount">Home Runs: 0</div></div>
+                </div>
+                <div id="jumbotron">HOME RUN!</div>
+                <div class="run-log-widget">
+                  <div class="widget-header"><span>📊 Multi-Run Trajectory Ghost Log</span><button class="clear-btn" onclick="clearGhostTrails()">Clear Ghosts</button></div>
+                  <table class="log-table">
+                    <thead><tr><th>Run</th><th>Bat</th><th>EV</th><th>Spin</th><th>Dist</th></tr></thead>
+                    <tbody id="logBody"><tr><td colspan="5" style="color:var(--muted);text-align:center;">Launch a simulation to log telemetry...</td></tr></tbody>
+                  </table>
+                </div>
+                <div class="radar-widget">
+                  <div class="widget-header" style="margin-bottom:2px;"><span>📡 2D Statcast Spray Radar</span><span id="gustBadge" style="color:var(--cyan);">0.0 mph</span></div>
+                  <canvas id="sprayCanvas" width="210" height="130"></canvas>
+                  <div style="display:flex;justify-content:space-between;font-size:0.78rem;color:var(--muted);">
+                    <span>Gust: <strong id="gustReadout" style="color:var(--gold);">+0.0 mph</strong></span>
+                    <span>Cross: <strong id="crossReadout" style="color:var(--cyan);">0.0 mph</strong></span>
+                  </div>
+                </div>
+                <canvas id="simCanvas"></canvas>
+                <div id="gameOverUI">
+                  <div class="modal-box">
+                    <h2 style="margin:0;color:var(--gold);font-size:1.65rem;">⚾ VERIFIED STATCAST RECORD</h2>
+                    <p style="color:var(--text);margin:8px 0 4px;font-size:0.95rem;" id="modalSubtitle">Cryptographically Signed Peak Distance:</p>
+                    <div style="font-size:2.4rem;font-weight:900;color:var(--mint);font-family:monospace;" id="finalScoreText">0.00 ft</div>
+                    <input type="text" id="playerName" placeholder="Enter Engineer / Batter Name..." autocomplete="off">
+                    <div style="display:flex;gap:10px;">
+                      <button class="btn-main" style="flex:1;background:#233345;color:white;" onclick="document.getElementById('gameOverUI').style.display='none'">Resume Lab</button>
+                      <button class="btn-main" style="flex:1;background:var(--gold);color:var(--navy-950);" id="submitScoreBtn">🔒 Transmit to Sheet</button>
+                    </div>
+                  </div>
+                </div>
+              </main>
+              <script>
+                (() => {
+                  const ENDPOINT = 'https://script.google.com/macros/s/AKfycbzMrutUPsSmdMSuRpb-I2kH0PA6WXKRWhoTNeCdlvuiDucQfL2him3YYGx2eX60shzO/exec';
+                  document.addEventListener('contextmenu', e => e.preventDefault());
+                  window.addEventListener('keydown', e => { if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase())) || (e.ctrlKey && e.key.toUpperCase() === 'U')) e.preventDefault(); });
+                  const canvas = document.getElementById('simCanvas'), ctx = canvas.getContext('2d');
+                  const sprayCanvas = document.getElementById('sprayCanvas'), sCtx = sprayCanvas.getContext('2d');
+                  function resize() { canvas.width = canvas.parentElement.clientWidth; canvas.height = canvas.parentElement.clientHeight; drawSprayRadar(); }
+                  window.addEventListener('resize', resize);
+
+                  function _sign(student, game, score, ts) {
+                    const raw = `${student}|${game}|${Number(score).toFixed(2)}|${ts}|CCC-V5-SALT-9941`;
+                    let h = 0x811c9dc5;
+                    for (let i = 0; i < raw.length; i++) { h ^= raw.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+                    return (h >>> 0).toString(16).padStart(8, '0');
+                  }
+
+                  const AudioCtx = window.AudioContext || window.webkitAudioContext; let audioCtx = null;
+                  function playSound(type) {
+                    try {
+                      if (!audioCtx) audioCtx = new AudioCtx();
+                      const now = audioCtx.currentTime;
+                      if (type === 'crack' || type === 'ping') {
+                        const osc = audioCtx.createOscillator(), gain = audioCtx.createGain();
+                        osc.type = type === 'ping' ? 'sine' : 'triangle';
+                        osc.frequency.setValueAtTime(type === 'ping' ? 1420 : 280, now);
+                        osc.frequency.exponentialRampToValueAtTime(90, now + 0.14);
+                        gain.gain.setValueAtTime(0.45, now); gain.gain.exponentialRampToValueAtTime(0.001, now + 0.16);
+                        osc.connect(gain); gain.connect(audioCtx.destination); osc.start(now); osc.stop(now + 0.16);
+                      } else if (type === 'cheer') {
+                        const bufferSize = audioCtx.sampleRate * 0.9, buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate), data = buffer.getChannelData(0);
+                        for (let i = 0; i < bufferSize; i++) data[i] = (Math.random() * 2 - 1) * Math.exp(-i / (audioCtx.sampleRate * 0.4));
+                        const noise = audioCtx.createBufferSource(), filter = audioCtx.createBiquadFilter();
+                        filter.type = 'bandpass'; filter.frequency.value = 900;
+                        noise.buffer = buffer; noise.connect(filter); filter.connect(audioCtx.destination); noise.start(now);
+                      }
+                    } catch (e) {}
+                  }
+
+                  let mode = 'engineering', camMode = 'catcher', phase = 'idle';
+                  let batMass = 32, swingEffort = 88, attackAngle = 24, sprayAngle = 0, barrelOffset = 12, swingDelay = 425, baseWind = 0, tempF = 72, altitudeFt = 680, airDensityRho = 1.184;
+                  let activeGust = 0, activeCrosswind = 0;
+                  let ball = { x: 0, y: 3, z: 60.5, vx: 0, vy: 0, vz: 0, spinRPM: 2200 };
+                  let trail = [], ghostTrails = [], landingSpots = [], particles = [];
+                  let stars = Array.from({ length: 95 }, () => ({ x: Math.random(), y: Math.random() * 0.46, r: Math.random() * 1.7 + 0.5 }));
+                  let currentDist = 0, exitVelo = 0, launchDeg = 0, backspinRPM = 0, maxApex = 0, hangTime = 0, homeRunCount = 0, runCount = 0;
+                  let _bestVault = 0, _vaultChecksum = 0x3C9A;
+                  let derbySwingsLeft = 10, batSwingProgress = 0, isSwinging = false, autoSwingTimer = null;
+
+                  window.updatePhysicsPreview = () => {
+                    const tempC = (tempF - 32) * 5 / 9, altMeters = altitudeFt * 0.3048;
+                    airDensityRho = 1.225 * Math.pow(1 - (0.0000225577 * altMeters), 5.25588) * (288.15 / (tempC + 273.15));
+                    document.getElementById('hudRho').innerText = airDensityRho.toFixed(3) + ' kg/m³';
+                    document.getElementById('hudAlt').innerText = `Alt: ${altitudeFt} ft | ${tempF}°F`;
+                  };
+                  window.applyStadiumPreset = () => {
+                    const preset = document.getElementById('stadiumPreset').value;
+                    if (preset === 'erie')   { altitudeFt = 680;  tempF = 72; }
+                    if (preset === 'denver') { altitudeFt = 5280; tempF = 82; }
+                    if (preset === 'miami')  { altitudeFt = 10;   tempF = 88; }
+                    if (preset === 'sf')     { altitudeFt = 25;   tempF = 54; }
+                    document.getElementById('tempSlider').value = tempF; document.getElementById('tempVal').innerText = tempF + '°F';
+                    updatePhysicsPreview();
+                  };
+
+                  document.getElementById('massSlider').oninput = e => { batMass = +e.target.value; document.getElementById('massVal').innerText = batMass + ' oz'; };
+                  document.getElementById('powerSlider').oninput = e => { swingEffort = +e.target.value; document.getElementById('powerVal').innerText = swingEffort + '%'; };
+                  document.getElementById('angleSlider').oninput = e => { attackAngle = +e.target.value; document.getElementById('angleVal').innerText = attackAngle + '°'; };
+                  document.getElementById('spraySlider').oninput = e => { sprayAngle = +e.target.value; document.getElementById('sprayVal').innerText = `${sprayAngle}° ${sprayAngle === 0 ? '(Center)' : (sprayAngle < 0 ? '(Pull LF)' : '(Oppo RF)')}`; };
+                  document.getElementById('offsetSlider').oninput = e => { barrelOffset = +e.target.value; document.getElementById('offsetVal').innerText = `${barrelOffset > 0 ? '+' : ''}${barrelOffset} mm (${barrelOffset > 4 ? 'Backspin' : (barrelOffset < -4 ? 'Topspin' : 'Line Drive')})`; };
+                  document.getElementById('delaySlider').oninput = e => { swingDelay = +e.target.value; document.getElementById('delayVal').innerText = swingDelay + ' ms'; };
+                  document.getElementById('tempSlider').oninput = e => { tempF = +e.target.value; document.getElementById('tempVal').innerText = tempF + '°F'; updatePhysicsPreview(); };
+                  document.getElementById('windSlider').oninput = e => { baseWind = +e.target.value; document.getElementById('windVal').innerText = (baseWind >= 0 ? '+' : '') + baseWind + ' mph'; };
+
+                  window.setMode = m => {
+                    mode = m;
+                    document.getElementById('modeEng').classList.toggle('active', m === 'engineering');
+                    document.getElementById('modeArc').classList.toggle('active', m === 'arcade');
+                    document.getElementById('modeDer').classList.toggle('active', m === 'derby');
+                    document.getElementById('engPrecisionCard').classList.toggle('disabled', m !== 'engineering');
+                    document.getElementById('pitchBtn').innerText = m === 'engineering' ? 'Simulate' : 'Pitch [P]';
+                    if (m === 'derby') { derbySwingsLeft = 10; document.getElementById('derbyCounter').innerText = `10 Swings Left`; showBanner('🏆 10-PITCH DERBY! MAXIMIZE LONGEST HIT!', '#e9c46a'); }
+                    else document.getElementById('derbyCounter').innerText = '';
+                  };
+                  window.setCamera = (c, btn) => { camMode = c; document.querySelectorAll('.cam-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); };
+                  function showBanner(text, color = '#e9c46a') { const jb = document.getElementById('jumbotron'); jb.innerText = text; jb.style.borderColor = color; jb.style.color = color; jb.classList.add('show'); setTimeout(() => jb.classList.remove('show'), 2300); }
+                  window.clearGhostTrails = () => { ghostTrails = []; landingSpots = []; runCount = 0; document.getElementById('logBody').innerHTML = `<tr><td colspan="5" style="color:var(--muted);text-align:center;">Ghost history cleared.</td></tr>`; drawSprayRadar(); };
+
+                  function project3D(wx, wy, wz) {
+                    const W = canvas.width, H = canvas.height, fov = 530;
+                    if (camMode === 'top') { const scale = Math.min(W, H) / 510; return { x: W / 2 + wx * scale, y: H * 0.86 - wz * scale, s: scale, visible: true }; }
+                    if (camMode === 'side') { const scale = W / 510; return { x: W * 0.11 + wz * scale, y: H * 0.78 - wy * scale - (wx * 0.16 * scale), s: scale, visible: true }; }
+                    let camX = 0, camY = 14, camZ = -28;
+                    if (camMode === 'follow' && (phase === 'flight' || phase === 'landed')) { camX = ball.x * 0.55; camY = Math.max(12, ball.y * 0.45 + 10); camZ = ball.z - 55; }
+                    const dx = wx - camX, dy = wy - camY, dz = wz - camZ;
+                    if (dz <= 1) return { x: 0, y: 0, s: 0, visible: false };
+                    const scale = fov / dz; return { x: W / 2 + dx * scale, y: H * 0.66 - dy * scale, s: scale, visible: true };
+                  }
+
+                  document.getElementById('pitchBtn').onclick = startPitch;
+                  document.getElementById('swingBtn').onclick = triggerSwing;
+                  window.addEventListener('keydown', e => {
+                    if (e.code === 'Space' && !document.getElementById('swingBtn').disabled) { e.preventDefault(); triggerSwing(); }
+                    else if (e.code === 'KeyP' && !document.getElementById('pitchBtn').disabled) startPitch();
+                  });
+
+                  function startPitch() {
+                    if (phase === 'pitch' || phase === 'flight') return;
+                    if (mode === 'derby' && derbySwingsLeft <= 0) { derbySwingsLeft = 10; document.getElementById('derbyCounter').innerText = `10 Swings Left`; }
+                    clearTimeout(autoSwingTimer);
+                    activeGust = +(baseWind + (Math.random() - 0.48) * 9.5).toFixed(1);
+                    activeCrosswind = +((Math.random() - 0.5) * 13).toFixed(1);
+                    document.getElementById('gustReadout').innerText = (activeGust >= 0 ? '+' : '') + activeGust + ' mph';
+                    document.getElementById('crossReadout').innerText = (activeCrosswind >= 0 ? 'R ' : 'L ') + Math.abs(activeCrosswind) + ' mph';
+                    document.getElementById('gustBadge').innerText = `Wind: ${activeGust >= 0 ? '+' : ''}${activeGust} mph`;
+                    const pType = document.getElementById('pitchType').value;
+                    ball = { x: 0, y: 6.0, z: 60.5, vx: 0, vy: 0, vz: 0, type: pType, spinRPM: 2200 };
+                    trail = []; batSwingProgress = 0; isSwinging = false; maxApex = 0; hangTime = 0;
+                    if (pType === 'fastball')  { ball.vz = -2.15; ball.vy = -0.044; }
+                    if (pType === 'curveball') { ball.vz = -1.65; ball.vy =  0.036; ball.vx = 0.02; }
+                    if (pType === 'slider')    { ball.vz = -1.88; ball.vy = -0.020; ball.vx = -0.06; }
+                    if (pType === 'changeup')  { ball.vz = -1.72; ball.vy = -0.036; ball.vx = 0.015; }
+                    if (pType === 'knuckle')   { ball.vz = -1.48; ball.vy =  0.010; }
+                    phase = 'pitch'; document.getElementById('pitchBtn').disabled = true; document.getElementById('swingBtn').disabled = false;
+                    if (mode === 'engineering') autoSwingTimer = setTimeout(triggerSwing, swingDelay);
+                  }
+
+                  function triggerSwing() {
+                    if (phase !== 'pitch' || isSwinging) return;
+                    isSwinging = true; document.getElementById('swingBtn').disabled = true;
+                    const distFromPlate = Math.abs(ball.z), timingWindow = 9.5;
+                    if (distFromPlate <= timingWindow) {
+                      const timingQuality = Math.max(0.35, 1 - (distFromPlate / (timingWindow * 1.15)));
+                      const mat = document.getElementById('batMaterial').value;
+                      const cor = ({ wood: 0.50, bbcor: 0.525, carbon: 0.555, titanium: 0.595 })[mat] || 0.52;
+                      playSound(mat === 'wood' ? 'crack' : 'ping');
+                      const swingSpeedMph = (swingEffort * 0.85) - ((batMass - 30) * 0.95), pitchSpeedMph = Math.abs(ball.vz) * 44, massRatio = batMass / 5.125;
+                      const activeOffset = mode === 'engineering' ? barrelOffset : ((Math.random() * 24) - 4);
+                      const offsetPenalty = Math.max(0.45, 1 - Math.pow(activeOffset / 38, 2));
+                      const rawEV = (pitchSpeedMph * cor + (1 + cor) * swingSpeedMph * (massRatio / (1 + massRatio))) * timingQuality * offsetPenalty;
+                      exitVelo = Math.min(122, Math.max(35, rawEV * (0.99 + Math.random() * 0.02)));
+                      launchDeg = attackAngle + (activeOffset * 0.65);
+                      backspinRPM = Math.round(1100 + (activeOffset * 135) - (attackAngle * 12) + (Math.random() * 160 - 80));
+                      ball.spinRPM = backspinRPM;
+                      document.getElementById('hudExit').innerText = exitVelo.toFixed(1) + ' mph';
+                      document.getElementById('hudLaunchAngle').innerText = `Launch: ${launchDeg.toFixed(1)}°`;
+                      document.getElementById('hudSpin').innerText = `${backspinRPM} rpm`;
+                      document.getElementById('hudSpinType').innerText = backspinRPM >= 0 ? 'Magnus Lift (+)' : 'Topspin Dive (-)';
+                      const speedFtSec = exitVelo * 1.467, vRad = (launchDeg * Math.PI) / 180;
+                      const hRad = ((sprayAngle + (mode !== 'engineering' ? (ball.z * -2.8) : 0)) * Math.PI) / 180;
+                      const horizSpeed = speedFtSec * Math.cos(vRad);
+                      ball.vx = horizSpeed * Math.sin(hRad); ball.vy = speedFtSec * Math.sin(vRad); ball.vz = horizSpeed * Math.cos(hRad);
+                      phase = 'flight'; trail = [];
+                      showBanner(timingQuality > 0.88 && offsetPenalty > 0.88 ? '⚡ BARRELED! SWEET SPOT COLLISION!' : '💥 BALL IN PLAY!', '#00f2fe');
+                    } else {
+                      showBanner(ball.z > 0 ? 'SWING & MISS (EARLY!)' : 'SWING & MISS (LATE!)', '#ff4d6d');
+                      finishDerbyTurn(0);
+                    }
+                  }
+
+                  function finishDerbyTurn() {
+                    if (mode !== 'derby') return;
+                    derbySwingsLeft--; document.getElementById('derbyCounter').innerText = `${derbySwingsLeft} Swings Left`;
+                    if (derbySwingsLeft <= 0) {
+                      setTimeout(() => {
+                        document.getElementById('finalScoreText').innerText = _bestVault.toFixed(2) + ' ft';
+                        document.getElementById('modalSubtitle').innerText = `10-Pitch Derby Complete! Peak Distance:`;
+                        document.getElementById('gameOverUI').style.display = 'flex';
+                      }, 900);
+                    }
+                  }
+
+                  function recordGhostRun(finalDist, isFoul) {
+                    runCount++;
+                    const colors = ['#00f2fe', '#55efc4', '#a855f7', '#ff4d6d', '#ffd166', '#38bdf8'], color = colors[(runCount - 1) % colors.length];
+                    ghostTrails.push({ points: [...trail], color, dist: finalDist }); if (ghostTrails.length > 6) ghostTrails.shift();
+                    landingSpots.push({ x: ball.x, z: ball.z, color, isFoul }); drawSprayRadar();
+                    const matName = document.getElementById('batMaterial').value.toUpperCase().slice(0, 4);
+                    const row = `<tr><td style="color:${color};font-weight:bold;">#${runCount}</td><td>${matName}</td><td>${exitVelo.toFixed(1)}</td><td>${backspinRPM}</td><td style="color:var(--gold);font-weight:bold;">${finalDist.toFixed(2)}ft</td></tr>`;
+                    const tbody = document.getElementById('logBody');
+                    tbody.innerHTML = runCount === 1 ? row : row + tbody.innerHTML.split('</tr>').slice(0, 4).join('</tr>');
+                  }
+
+                  function drawSprayRadar() {
+                    const W = sprayCanvas.width, H = sprayCanvas.height; sCtx.clearRect(0, 0, W, H);
+                    const cx = W / 2, cy = H - 12, scale = (H - 24) / 420;
+                    sCtx.strokeStyle = 'rgba(0,242,254,0.35)'; sCtx.lineWidth = 1.2;
+                    [200, 325, 400].forEach(r => { sCtx.beginPath(); sCtx.arc(cx, cy, r * scale, -Math.PI * 0.75, -Math.PI * 0.25); sCtx.stroke(); });
+                    sCtx.beginPath(); sCtx.moveTo(cx, cy); sCtx.lineTo(cx - 325 * scale * 0.707, cy - 325 * scale * 0.707);
+                    sCtx.moveTo(cx, cy); sCtx.lineTo(cx + 325 * scale * 0.707, cy - 325 * scale * 0.707); sCtx.stroke();
+                    landingSpots.forEach(pt => { sCtx.fillStyle = pt.isFoul ? '#ff4d6d' : pt.color; sCtx.beginPath(); sCtx.arc(cx + pt.x * scale, cy - pt.z * scale, 3.8, 0, Math.PI * 2); sCtx.fill(); });
+                  }
+
+                  function spawnFireworks(wx, wy, wz) {
+                    playSound('cheer');
+                    for (let i = 0; i < 60; i++) {
+                      const a = Math.random() * Math.PI * 2, spd = Math.random() * 5.5 + 2;
+                      particles.push({ x: wx, y: wy + 16, z: wz, vx: Math.cos(a) * spd, vy: Math.random() * 6.5 + 2, vz: Math.sin(a) * spd, life: 1.0, color: ['#e9c46a', '#00f2fe', '#55efc4', '#ff4d6d'][i % 4] });
+                    }
+                  }
+
+                  function animate() {
+                    const dt = 1 / 60;
+                    if (isSwinging && batSwingProgress < 1) batSwingProgress = Math.min(1, batSwingProgress + 0.18);
+                    if (phase === 'pitch') {
+                      if (ball.type === 'curveball') ball.vy -= 0.0033;
+                      if (ball.type === 'slider')    ball.vx += 0.0026;
+                      if (ball.type === 'knuckle')   { ball.vx += Math.sin(ball.z * 0.35) * 0.008; ball.vy += Math.cos(ball.z * 0.42) * 0.005; }
+                      ball.x += ball.vx; ball.y += ball.vy; ball.z += ball.vz;
+                      trail.push({ x: ball.x, y: ball.y, z: ball.z }); if (trail.length > 25) trail.shift();
+                      if (ball.z < -6) {
+                        phase = 'idle'; document.getElementById('pitchBtn').disabled = false; document.getElementById('swingBtn').disabled = true;
+                        if (!isSwinging) { showBanner('CALLED STRIKE!', '#ff4d6d'); finishDerbyTurn(0); }
+                      }
+                    }
+                    if (phase === 'flight') {
+                      hangTime += dt;
+                      const gravity = 32.174, densityRatio = airDensityRho / 1.225;
+                      const relVx = ball.vx - activeCrosswind * 1.467, relVz = ball.vz - activeGust * 1.467;
+                      const speed = Math.sqrt(relVx * relVx + ball.vy * ball.vy + relVz * relVz);
+                      const dragAccel = 0.00118 * densityRatio * speed;
+                      const magnusLiftAccel = Math.min(14.5, Math.max(-12.0, (ball.spinRPM / 2400) * densityRatio * speed * 0.042));
+                      ball.vx -= (dragAccel * relVx) * dt; ball.vz -= (dragAccel * relVz) * dt;
+                      ball.vy += (magnusLiftAccel - gravity - (dragAccel * ball.vy)) * dt;
+                      ball.x += ball.vx * dt; ball.y += ball.vy * dt; ball.z += ball.vz * dt;
+                      if (ball.y > maxApex) maxApex = ball.y;
+                      trail.push({ x: ball.x, y: ball.y, z: ball.z }); if (trail.length > 180) trail.shift();
+                      currentDist = Math.sqrt(ball.x * ball.x + ball.z * ball.z);
+                      document.getElementById('hudDist').innerText = currentDist.toFixed(2) + ' ft';
+                      document.getElementById('hudApex').innerText = maxApex.toFixed(1) + ' ft';
+                      document.getElementById('hudHang').innerText = `Hang: ${hangTime.toFixed(2)} s`;
+
+                      if (ball.y <= 0 || hangTime >= 25) {
+                        ball.y = 0; phase = 'landed'; document.getElementById('pitchBtn').disabled = false; document.getElementById('swingBtn').disabled = true;
+                        const rollBonus = launchDeg < 18 ? Math.max(0, (20 - launchDeg) * 1.35) : 0;
+                        const totalDist = currentDist + rollBonus;
+                        document.getElementById('hudDist').innerText = totalDist.toFixed(2) + ' ft';
+                        document.getElementById('hudCarry').innerText = `Carry: ${currentDist.toFixed(1)}ft | Roll: +${rollBonus.toFixed(1)}ft`;
+                        const hitAngleRad = Math.atan2(ball.x, ball.z), fenceDist = 400 - Math.abs(Math.sin(hitAngleRad * 2)) * 75, isFoul = Math.abs(hitAngleRad) > Math.PI / 4;
+                        recordGhostRun(totalDist, isFoul);
+                        if (isFoul) showBanner(`FOUL BALL (${totalDist.toFixed(2)} ft)`, '#ff4d6d');
+                        else {
+                          if (totalDist > _bestVault) {
+                            _bestVault = Number(totalDist.toFixed(2)); _vaultChecksum = Math.round(_bestVault * 100) ^ 0x3C9A;
+                            document.getElementById('hudBest').innerText = _bestVault.toFixed(2) + ' ft';
+                            document.getElementById('bestBtnText').innerText = _bestVault.toFixed(2);
+                          }
+                          if (currentDist >= fenceDist) { homeRunCount++; document.getElementById('hudHRCount').innerText = `Home Runs: ${homeRunCount}`; showBanner(`🎆 HOME RUN! ${totalDist.toFixed(2)} FT!`, '#e9c46a'); spawnFireworks(ball.x, ball.y, ball.z); }
+                          else showBanner(`FAIR BALL: ${totalDist.toFixed(2)} FT`, '#55efc4');
+                        }
+                        finishDerbyTurn(isFoul ? 0 : totalDist);
+                      }
+                    }
+                    const W = canvas.width, H = canvas.height; ctx.clearRect(0, 0, W, H);
+                    if (camMode !== 'top') { ctx.fillStyle = 'rgba(255,255,255,0.65)'; stars.forEach(s => { ctx.beginPath(); ctx.arc(s.x * W, s.y * H, s.r, 0, Math.PI * 2); ctx.fill(); }); }
+                    [100, 200, 300, 400].forEach(r => {
+                      ctx.beginPath(); ctx.strokeStyle = r === 400 ? '#e9c46a' : 'rgba(0,242,254,0.2)'; ctx.lineWidth = r === 400 ? 3 : 1.2;
+                      for (let deg = -45; deg <= 45; deg += 3) {
+                        const rad = (deg * Math.PI) / 180, arcR = r === 400 ? (400 - Math.abs(Math.sin(rad * 2)) * 75) : r;
+                        const p = project3D(Math.sin(rad) * arcR, 0, Math.cos(rad) * arcR);
+                        if (deg === -45) ctx.moveTo(p.x, p.y); else ctx.lineTo(p.x, p.y);
+                      }
+                      ctx.stroke();
+                    });
+                    ctx.beginPath(); ctx.strokeStyle = 'rgba(233,196,106,0.6)'; ctx.lineWidth = 2;
+                    for (let deg = -45; deg <= 45; deg += 5) {
+                      const rad = (deg * Math.PI) / 180, fenceR = 400 - Math.abs(Math.sin(rad * 2)) * 75, wx = Math.sin(rad) * fenceR, wz = Math.cos(rad) * fenceR;
+                      const pBot = project3D(wx, 0, wz), pTop = project3D(wx, 14, wz);
+                      ctx.moveTo(pBot.x, pBot.y); ctx.lineTo(pTop.x, pTop.y);
+                    }
+                    ctx.stroke();
+                    [-45, 45].forEach(deg => {
+                      const rad = (deg * Math.PI) / 180, wx = Math.sin(rad) * 325, wz = Math.cos(rad) * 325;
+                      const pHome = project3D(0, 0, 0), pCorner = project3D(wx, 0, wz), pPole = project3D(wx, 65, wz);
+                      ctx.strokeStyle = 'rgba(255,255,255,0.5)'; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(pHome.x, pHome.y); ctx.lineTo(pCorner.x, pCorner.y); ctx.stroke();
+                      ctx.strokeStyle = '#ffd166'; ctx.lineWidth = 3; ctx.beginPath(); ctx.moveTo(pCorner.x, pCorner.y); ctx.lineTo(pPole.x, pPole.y); ctx.stroke();
+                    });
+                    const bases = [project3D(0,0,0), project3D(63.6,0,63.6), project3D(0,0,127.2), project3D(-63.6,0,63.6)];
+                    ctx.strokeStyle = 'rgba(85,239,196,0.45)'; ctx.lineWidth = 1.8; ctx.beginPath();
+                    bases.forEach((b, i) => i === 0 ? ctx.moveTo(b.x, b.y) : ctx.lineTo(b.x, b.y)); ctx.closePath(); ctx.stroke();
+                    ghostTrails.forEach(gt => {
+                      ctx.beginPath(); ctx.strokeStyle = gt.color; ctx.globalAlpha = 0.42; ctx.lineWidth = 2;
+                      gt.points.forEach((pt, idx) => { const tp = project3D(pt.x, pt.y, pt.z); if (idx === 0) ctx.moveTo(tp.x, tp.y); else ctx.lineTo(tp.x, tp.y); });
+                      ctx.stroke(); ctx.globalAlpha = 1.0;
+                    });
+                    const szBotL = project3D(-1.2, 1.5, 0), szTopR = project3D(1.2, 4.2, 0);
+                    if (szBotL.visible && szTopR.visible) { ctx.strokeStyle = 'rgba(0,242,254,0.45)'; ctx.lineWidth = 1.5; ctx.strokeRect(szBotL.x, szTopR.y, szTopR.x - szBotL.x, szBotL.y - szTopR.y); }
+                    const batterPos = project3D(-3.2, 0, 0), shoulderPos = project3D(-2.4, 4.0, 0);
+                    if (batterPos.visible) {
+                      ctx.fillStyle = '#1d6384'; const bW = 1.2 * batterPos.s, bH = 5.2 * batterPos.s;
+                      ctx.fillRect(batterPos.x - bW / 2, batterPos.y - bH, bW, bH);
+                      const swingAngle = -0.8 + (batSwingProgress * 2.5);
+                      const batTip = project3D(-2.4 + Math.cos(swingAngle) * 3.8, 3.6 + Math.sin(swingAngle) * 1.2, Math.sin(swingAngle) * 2.5);
+                      ctx.strokeStyle = '#e9c46a'; ctx.lineWidth = Math.max(3, 0.35 * shoulderPos.s); ctx.lineCap = 'round';
+                      ctx.beginPath(); ctx.moveTo(shoulderPos.x, shoulderPos.y); ctx.lineTo(batTip.x, batTip.y); ctx.stroke();
+                    }
+                    if (trail.length > 1) {
+                      ctx.beginPath(); ctx.strokeStyle = 'rgba(0,0,0,0.35)'; ctx.lineWidth = 2;
+                      trail.forEach((pt, idx) => { const sp = project3D(pt.x, 0, pt.z); if (idx === 0) ctx.moveTo(sp.x, sp.y); else ctx.lineTo(sp.x, sp.y); }); ctx.stroke();
+                      ctx.beginPath(); ctx.strokeStyle = phase === 'pitch' ? '#00f2fe' : '#e9c46a'; ctx.lineWidth = 3.5;
+                      trail.forEach((pt, idx) => { const tp = project3D(pt.x, pt.y, pt.z); if (idx === 0) ctx.moveTo(tp.x, tp.y); else ctx.lineTo(tp.x, tp.y); }); ctx.stroke();
+                    }
+                    const bProj = project3D(ball.x, ball.y, ball.z);
+                    if (bProj.visible) {
+                      ctx.fillStyle = '#ffffff'; ctx.shadowColor = '#00f2fe'; ctx.shadowBlur = 12;
+                      ctx.beginPath(); ctx.arc(bProj.x, bProj.y, Math.max(3.5, 0.45 * bProj.s), 0, Math.PI * 2); ctx.fill(); ctx.shadowBlur = 0;
+                    }
+                    for (let i = particles.length - 1; i >= 0; i--) {
+                      const pt = particles[i]; pt.x += pt.vx * 0.15; pt.y += pt.vy * 0.15; pt.z += pt.vz * 0.15; pt.vy -= 0.18; pt.life -= 0.018;
+                      const pp = project3D(pt.x, pt.y, pt.z);
+                      if (pp.visible && pt.life > 0) { ctx.fillStyle = pt.color; ctx.globalAlpha = pt.life; ctx.beginPath(); ctx.arc(pp.x, pp.y, Math.max(2, 0.5 * pp.s), 0, Math.PI * 2); ctx.fill(); ctx.globalAlpha = 1.0; }
+                      else if (pt.life <= 0) particles.splice(i, 1);
+                    }
+                    requestAnimationFrame(animate);
+                  }
+
+                  document.getElementById('openSubmitBtn').onclick = () => {
+                    document.getElementById('finalScoreText').innerText = _bestVault.toFixed(2) + ' ft';
+                    document.getElementById('modalSubtitle').innerText = `Cryptographically Signed Peak Distance:`;
+                    document.getElementById('gameOverUI').style.display = 'flex';
+                  };
+                  document.getElementById('submitScoreBtn').onclick = () => {
+                    const pName = document.getElementById('playerName').value.trim();
+                    if (!pName) return alert('Please enter your name before transmitting.');
+                    const btn = document.getElementById('submitScoreBtn');
+                    btn.disabled = true; btn.innerText = '⏳ Transmitting...';
+                    const verifiedScore = Number((((Math.round(_bestVault * 100) ^ 0x3C9A) === _vaultChecksum) ? _bestVault : 0).toFixed(2));
+                    const ts = Date.now(), sig = _sign(pName, 'AeroBat 3D Pro', verifiedScore, ts);
+                    const payload = { type: 'GAME_OVER', student: pName, game: 'AeroBat 3D Pro', score: verifiedScore, ts, sig, migratedByChild: true };
+                    try { const bc = new BroadcastChannel('captains_code_channel'); bc.postMessage(payload); } catch(e) {}
+                    try { if (window.opener) window.opener.postMessage(payload, '*'); } catch(e) {}
+                    fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify({ student: pName, game: 'AeroBat 3D Pro', score: verifiedScore, ts, sig }) })
+                      .catch(() => {})
+                      .finally(() => {
+                        btn.innerText = '✅ Score Logged!';
+                        setTimeout(() => { window.close(); document.getElementById('gameOverUI').style.display = 'none'; btn.disabled = false; btn.innerText = '🔒 Transmit to Sheet'; }, 500);
+                      });
+                  };
+                  resize(); updatePhysicsPreview(); animate();
+                })();
+              </script>
+            </body>
+            </html>
+          </template>
+          <button class="project-link launch-newtab-btn" type="button" data-template-id="game-template-3">⚾ Launch AeroBat 3D PRO ↗</button>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="content-section" id="stocks" aria-labelledby="stocks-title">
+      <div class="section-head">
+        <div>
+          <div class="section-kicker">Market learning</div>
+          <h2 id="stocks-title">Company Watchlist: Tech & Aerospace</h2>
+          <p class="section-intro">Track leading innovators in EV, private aerospace, and accelerated computing.</p>
+          <div class="section-rule"></div>
+        </div>
+      </div>
+      <div class="api-guidance-box">
+        <strong>⚡ Live Stock API & Leaderboard CSV Integration Guide:</strong>
+        <p style="margin:6px 0 10px;">Right-click anywhere inside this section to store your Stock API Key or Published Google Sheet CSV Link.</p>
+        <ul style="margin:0;padding-left:20px;">
+          <li><strong>Tesla (TSLA) & NVIDIA (NVDA):</strong> Registered on NASDAQ. Retrieve free live quotes with <code>Finnhub</code> or <code>Alpha Vantage</code> via: <code>fetch(`https://finnhub.io/api/v1/quote?symbol=TSLA&token=${YOUR_KEY}`)</code>.</li>
+          <li><strong>SpaceX:</strong> Space Exploration Technologies Corp. is privately held. Query live mission data via the free SpaceX Launch API: <code>fetch('https://api.spacexdata.com/v4/launches/latest')</code>.</li>
+        </ul>
+      </div>
+      <div class="stock-summary">
+        <div class="summary-tile"><span>Companies tracked</span><strong id="trackedCount">3</strong></div>
+        <div class="summary-tile"><span>Watchlist value*</span><strong id="watchValue">$—</strong></div>
+        <div class="summary-tile"><span>Positive sample moves</span><strong id="positiveCount">3 of 3</strong></div>
+      </div>
+      <form class="stock-tools" id="addStockForm">
+        <input class="field" id="tickerInput" maxlength="8" placeholder="Ticker (e.g. AMD)" autocomplete="off" required>
+        <input class="field" id="companyInput" maxlength="60" placeholder="Company name" required>
+        <button class="btn btn-gold" type="submit">＋ Add company</button>
+      </form>
+      <div class="stock-table-wrap">
+        <table class="stock-table">
+          <thead><tr><th scope="col">Company</th><th scope="col">Sample Price / Valuation</th><th scope="col">Daily Trend</th><th scope="col">Action</th></tr></thead>
+          <tbody id="stockRows">
+            <tr data-ticker="TSLA"><td><span class="ticker">TSLA</span><span class="company-name">Tesla, Inc.</span></td><td class="price">$220.70</td><td class="change-up">+3.15%</td><td><button class="remove-btn" type="button">Remove</button></td></tr>
+            <tr data-ticker="SPACE-X"><td><span class="ticker">SPACE-X</span><span class="company-name">Space Exploration Technologies (Private)</span></td><td class="price">$112.00</td><td class="change-up">+1.85%</td><td><button class="remove-btn" type="button">Remove</button></td></tr>
+            <tr data-ticker="NVDA"><td><span class="ticker">NVDA</span><span class="company-name">NVIDIA Corporation</span></td><td class="price">$138.25</td><td class="change-up">+4.60%</td><td><button class="remove-btn" type="button">Remove</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="stock-footnote">*Illustrative values shown. To connect live automated quotes, use the API guide above.</p>
+    </section>
+
+    <section class="content-section" aria-labelledby="contact-title">
+      <div class="contact-card">
+        <div>
+          <h3 id="contact-title">Ready to chart a new course?</h3>
+          <p>Have a project idea? Start with a question, work as a team, and see where creativity can take you.</p>
+        </div>
+        <a class="btn btn-gold" href="#projects">Explore the work →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div><strong>Captains Code Consulting</strong><br><small>Sail the Three C's · Creativity · Collaboration · Critical Thinking</small></div>
+      <div class="footer-links"><a href="#home">Home</a><a href="#projects">Projects</a><a href="#company">Company</a><a href="#stocks">Stocks</a></div>
+      <small>© <span id="year"></span> Captains Code Consulting</small>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <div id="stockContextMenu">
+    <div class="context-menu-item" id="addApiKeyBtn"><span>🔑</span> Add Stock API Key</div>
+    <div class="context-menu-item" id="addCsvUrlBtn"><span>📊</span> Override Leaderboard CSV URL</div>
+  </div>
+
+  <script>
+    (() => {
+      const DATA_MIGRATION_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzMrutUPsSmdMSuRpb-I2kH0PA6WXKRWhoTNeCdlvuiDucQfL2him3YYGx2eX60shzO/exec';
+      const HARDCODED_PUBLISHED_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vRdqTbLyIj629zlnLe9HJxP9KNLBwPlYgMUyhFAgJCqarCGxAq3DimeVHHsUmMc-i2C7aLDOLkNbh7W/pub?gid=0&single=true&output=csv';
+      let PUBLISHED_SHEET_CSV_URL = localStorage.getItem('captainsLeaderboardCsvUrl') || HARDCODED_PUBLISHED_CSV_URL;
+
+      document.getElementById('projects').addEventListener('contextmenu', e => e.preventDefault());
+      window.addEventListener('keydown', e => { if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key.toUpperCase()))) e.preventDefault(); });
+
+      function verifySignature(student, game, score, ts, sig) {
+        if (!sig || !ts) return false;
+        if (Math.abs(Date.now() - Number(ts)) > 300000) return false;
+        const raw = `${student}|${game}|${Number(score).toFixed(2)}|${ts}|CCC-V5-SALT-9941`;
+        let h = 0x811c9dc5;
+        for (let i = 0; i < raw.length; i++) { h ^= raw.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+        return (h >>> 0).toString(16).padStart(8, '0') === sig;
+      }
+
+      const MAX_PLAUSIBLE_SCORES = { starship: 25000, glider: 1850, baseball: 720 };
+      const verifiedState = {
+        starship: { student: 'Awaiting Pilot...', score: 0 },
+        glider:   { student: 'Awaiting Engineer...', score: 0 },
+        baseball: { student: 'Awaiting Batter...', score: 0 }
+      };
+
+      let isInternalRender = false;
+      function renderLeaderboardBadges() {
+        isInternalRender = true;
+        document.getElementById('holder-starship').textContent = verifiedState.starship.student;
+        document.getElementById('score-starship').textContent  = `${Math.round(verifiedState.starship.score)} pts`;
+        document.getElementById('holder-glider').textContent   = verifiedState.glider.student;
+        document.getElementById('score-glider').textContent    = `${Number(verifiedState.glider.score).toFixed(2)} ft`;
+        document.getElementById('holder-baseball').textContent = verifiedState.baseball.student;
+        document.getElementById('score-baseball').textContent  = `${Number(verifiedState.baseball.score).toFixed(2)} ft`;
+        setTimeout(() => { isInternalRender = false; }, 20);
+      }
+
+      const badgeObserver = new MutationObserver(() => { if (!isInternalRender) renderLeaderboardBadges(); });
+      ['badge-starship', 'badge-glider', 'badge-baseball'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) badgeObserver.observe(el, { childList: true, subtree: true, characterData: true });
+      });
+
+      function updateVerifiedTopScore(gameName, studentName, numericScore) {
+        const g = (gameName || '').toLowerCase();
+        let key = null;
+        if (g.includes('starship')) key = 'starship';
+        else if (g.includes('glider') || g.includes('aerolab')) key = 'glider';
+        else if (g.includes('aerobat') || g.includes('baseball')) key = 'baseball';
+        if (key && numericScore > 0 && numericScore <= MAX_PLAUSIBLE_SCORES[key] && numericScore > verifiedState[key].score) {
+          verifiedState[key] = { student: studentName, score: numericScore };
+          renderLeaderboardBadges();
+        }
+      }
+
+      const menuToggle = document.getElementById('menuToggle'), navLinks = document.getElementById('navLinks'), navAnchors = [...navLinks.querySelectorAll('a')], toast = document.getElementById('toast');
+      let toastTimer;
+      function showToast(message) { toast.textContent = message; toast.classList.add('show'); clearTimeout(toastTimer); toastTimer = setTimeout(() => toast.classList.remove('show'), 3600); }
+      menuToggle.addEventListener('click', () => { const isOpen = navLinks.classList.toggle('open'); menuToggle.setAttribute('aria-expanded', String(isOpen)); });
+      navAnchors.forEach(anchor => { anchor.addEventListener('click', () => { navLinks.classList.remove('open'); menuToggle.setAttribute('aria-expanded', 'false'); navAnchors.forEach(link => link.classList.toggle('active', link === anchor)); }); });
+
+      const projectSearch = document.getElementById('projectSearch'), projectCategory = document.getElementById('projectCategory'), projectCards = [...document.querySelectorAll('.project-card')];
+      function filterProjects() {
+        const term = projectSearch.value.trim().toLowerCase(), category = projectCategory.value;
+        let visible = 0;
+        projectCards.forEach(card => {
+          const show = (card.dataset.search + ' ' + card.textContent).toLowerCase().includes(term) && (category === 'all' || card.dataset.category === category);
+          card.hidden = !show; if (show) visible++;
+        });
+        let empty = document.getElementById('projectEmpty');
+        if (!visible && !empty) { empty = document.createElement('div'); empty.id = 'projectEmpty'; empty.className = 'empty-state'; empty.textContent = 'No projects match your search.'; document.getElementById('projectGrid').appendChild(empty); }
+        else if (visible && empty) empty.remove();
+      }
+      projectSearch.addEventListener('input', filterProjects);
+      projectCategory.addEventListener('change', filterProjects);
+
+      document.getElementById('projectGrid').addEventListener('click', event => {
+        const button = event.target.closest('.launch-newtab-btn');
+        if (!button) return;
+        const template = document.getElementById(button.dataset.templateId);
+        if (template) {
+          const blob = new Blob([template.innerHTML.trim()], { type: 'text/html' });
+          window.open(URL.createObjectURL(blob), '_blank');
+          showToast('🔒 Protected Simulation launched in new tab!');
+        }
+      });
+
+      async function syncLeaderboardFromPublishedCSV(showFeedback = false) {
+        const activeCsvUrl = (PUBLISHED_SHEET_CSV_URL || '').trim();
+        if (!activeCsvUrl || activeCsvUrl.includes('PASTE_YOUR_PUBLISHED_CSV_URL_HERE')) return;
+        try {
+          const res = await fetch(activeCsvUrl, { cache: 'no-store' });
+          const csvText = await res.text();
+          csvText.split(/\r?\n/).map(r => r.split(',').map(c => c.replace(/^"|"$/g, '').trim())).forEach(cols => {
+            if (cols.length < 3) return;
+            const student = cols.length >= 4 ? cols[1] : cols[0];
+            const game    = cols.length >= 4 ? cols[2] : cols[1];
+            const score   = parseFloat(cols.length >= 4 ? cols[3] : cols[2]);
+            if (!isNaN(score) && student && game) updateVerifiedTopScore(game, student, score);
+          });
+          if (showFeedback) showToast('🏆 Global Leaderboard verified & synced with Google Sheet!');
+        } catch (err) {
+          if (showFeedback) showToast('Using verified session high scores.');
+        }
+      }
+
+      document.getElementById('refreshLeaderboardBtn').addEventListener('click', () => syncLeaderboardFromPublishedCSV(true));
+      renderLeaderboardBadges();
+      syncLeaderboardFromPublishedCSV(false);
+      setInterval(() => syncLeaderboardFromPublishedCSV(false), 60000);
+
+      let lastProcessedSig = '';
+      function handleIncomingGameOver(data) {
+        if (!data || data.type !== 'GAME_OVER') return;
+        const { student, game, score, ts, sig, migratedByChild } = data;
+        if (sig && sig === lastProcessedSig) return;
+        const numericScore = Number(parseFloat(score).toFixed(2)) || 0;
+        if (!verifySignature(student, game, numericScore, ts, sig)) {
+          showToast('🚨 SECURITY ALERT: Tampered or unsigned score rejected!');
+          return;
+        }
+        lastProcessedSig = sig;
+        const gameResult = { student: student || 'Anonymous User', game: game || 'Captains Lab', score: numericScore };
+        updateVerifiedTopScore(gameResult.game, gameResult.student, gameResult.score);
+        if (migratedByChild) {
+          showToast(`🏆 Database Sync Success! Verified score of ${gameResult.score} logged for ${gameResult.student}.`);
+        } else {
+          showToast(`🔒 Signature Verified: ${gameResult.student} (${gameResult.score}). Migrating...`);
+          migrateScoreToDatabase(gameResult);
+        }
+      }
+
+      window.addEventListener('message', event => handleIncomingGameOver(event.data));
+      try {
+        const bc = new BroadcastChannel('captains_code_channel');
+        bc.onmessage = event => handleIncomingGameOver(event.data);
+      } catch(e) {}
+
+      function migrateScoreToDatabase(payload) {
+        fetch(DATA_MIGRATION_ENDPOINT, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) })
+          .then(() => showToast(`🏆 Database Sync Success! Verified score of ${payload.score} logged.`))
+          .catch(() => showToast("REST Error: Failed to transmit data."));
+      }
+
+      const stockRows = document.getElementById('stockRows'), addStockForm = document.getElementById('addStockForm'), tickerInput = document.getElementById('tickerInput'), companyInput = document.getElementById('companyInput');
+      function updateStockSummary() {
+        const rows = [...stockRows.querySelectorAll('tr[data-ticker]')];
+        let total = 0, positive = 0;
+        rows.forEach(row => {
+          total += Number((row.querySelector('.price')?.textContent || '').replace(/[^0-9.]/g, '')) || 0;
+          if ((row.querySelector('td:nth-child(3)')?.textContent || '').trim().startsWith('+')) positive++;
+        });
+        document.getElementById('trackedCount').textContent = rows.length;
+        document.getElementById('watchValue').textContent = total.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+        document.getElementById('positiveCount').textContent = positive + ' of ' + rows.length;
+      }
+      stockRows.addEventListener('click', event => {
+        const button = event.target.closest('.remove-btn');
+        if (!button) return;
+        const row = button.closest('tr'); row.remove(); updateStockSummary(); showToast(row.dataset.ticker + ' removed.');
+      });
+      addStockForm.addEventListener('submit', event => {
+        event.preventDefault();
+        const ticker = tickerInput.value.trim().toUpperCase().replace(/[^A-Z0-9.-]/g, ''), company = companyInput.value.trim();
+        if (!ticker || !company) return showToast('Please enter both.');
+        if ([...stockRows.querySelectorAll('tr')].some(row => row.dataset.ticker === ticker)) return showToast(ticker + ' is already tracked.');
+        const row = document.createElement('tr'); row.dataset.ticker = ticker;
+        row.innerHTML = `<td><span class="ticker">${ticker}</span><span class="company-name">${company}</span></td><td class="price">—</td><td style="color:var(--muted)">Pending API</td><td><button class="remove-btn" type="button">Remove</button></td>`;
+        stockRows.appendChild(row); addStockForm.reset(); updateStockSummary(); showToast(ticker + ' added.');
+      });
+
+      document.getElementById('year').textContent = new Date().getFullYear();
+      updateStockSummary();
+
+      const stocksSection = document.getElementById('stocks'), contextMenu = document.getElementById('stockContextMenu');
+      stocksSection.addEventListener('contextmenu', e => { e.preventDefault(); contextMenu.style.display = 'block'; contextMenu.style.left = `${e.pageX}px`; contextMenu.style.top = `${e.pageY}px`; });
+      document.addEventListener('click', e => { if (e.target !== contextMenu) contextMenu.style.display = 'none'; });
+      document.getElementById('addApiKeyBtn').addEventListener('click', () => { const apiKey = prompt("Enter your Stock API Key:"); if (apiKey) { localStorage.setItem('studentStockApiKey', apiKey); showToast("API Key saved locally!"); } });
+      document.getElementById('addCsvUrlBtn').addEventListener('click', () => {
+        const csvUrl = prompt("Override Leaderboard CSV URL:", PUBLISHED_SHEET_CSV_URL);
+        if (csvUrl !== null) { PUBLISHED_SHEET_CSV_URL = csvUrl.trim(); localStorage.setItem('captainsLeaderboardCsvUrl', PUBLISHED_SHEET_CSV_URL); syncLeaderboardFromPublishedCSV(true); }
+      });
+    })();
+  </script>
+</body>
+</html>
